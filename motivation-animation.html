@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKA-Agent Motivation Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1f3a 0%, #2d3561 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #1a1f3a 0%, #2d3561 100%);
+            border-radius: 12px;
+            border: 2px solid #4a5578;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .controls {
+            padding: 16px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid #4a5578;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+
+        small {
+            color: #c7d2fe;
+            font-size: 13px;
+        }
+
+        /* Animation classes */
+        .motiv-flow-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+
+        .motiv-flow-line.animate {
+            animation: drawLine 1.5s ease forwards;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .motiv-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scale-in {
+            animation: scaleIn 0.5s ease forwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-VP2GFJFNGW');
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <svg id="motivationViz" viewBox="0 0 1000 600" aria-label="Jailbreak Motivation Animation">
+            <defs>
+                <marker id="arrowRed" orient="auto" markerWidth="10" markerHeight="10" refX="8" refY="5">
+                    <path d="M0,0 L0,10 L10,5 z" fill="#ff6b9d"></path>
+                </marker>
+                <marker id="arrowGreen" orient="auto" markerWidth="10" markerHeight="10" refX="8" refY="5">
+                    <path d="M0,0 L0,10 L10,5 z" fill="#4ade80"></path>
+                </marker>
+                <marker id="arrowBlue" orient="auto" markerWidth="10" markerHeight="10" refX="8" refY="5">
+                    <path d="M0,0 L0,10 L10,5 z" fill="#60a5fa"></path>
+                </marker>
+                <marker id="arrowPurple" orient="auto" markerWidth="10" markerHeight="10" refX="8" refY="5">
+                    <path d="M0,0 L0,10 L10,5 z" fill="#786fa6"></path>
+                </marker>
+
+                <radialGradient id="cloudGradient" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.15" />
+                    <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.05" />
+                </radialGradient>
+            </defs>
+
+            <!-- Background knowledge cloud -->
+            <ellipse id="cloud" cx="580" cy="320" rx="320" ry="200" fill="url(#cloudGradient)" stroke="#8b5cf6"
+                stroke-width="2" stroke-dasharray="8 4" opacity="0" />
+
+            <!-- Scene Title -->
+            <text id="title" x="500" y="50" text-anchor="middle" fill="#e0e7ff" font-size="22" font-weight="700"
+                opacity="0">
+                Correlated Knowledge in Target LLM
+            </text>
+            <text id="subtitle" x="500" y="78" text-anchor="middle" fill="#c7d2fe" font-size="14" opacity="0">
+                Jailbreak aims to extract the target knowledge V₀
+            </text>
+
+            <!-- Legend Box -->
+            <g id="legend" opacity="0">
+                <rect x="750" y="110" width="230" height="155" rx="8" fill="rgba(30, 41, 59, 0.9)" stroke="#4a5578"
+                    stroke-width="2" />
+                <text x="865" y="135" text-anchor="middle" fill="#e0e7ff" font-size="13" font-weight="600">Legend</text>
+
+                <!-- V nodes -->
+                <circle cx="770" cy="155" r="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5" />
+                <text x="785" y="160" fill="#c7d2fe" font-size="11">Vᵢ: Correlated Knowledge</text>
+
+                <!-- V0 -->
+                <circle cx="770" cy="177" r="10" fill="#7c2d12" stroke="#f87171" stroke-width="2" />
+                <text x="785" y="182" fill="#c7d2fe" font-size="11">V₀: Target Knowledge</text>
+
+                <!-- POA -->
+                <text x="770" y="202" fill="#c7d2fe" font-size="11" font-weight="600">POA:</text>
+                <text x="800" y="202" fill="#c7d2fe" font-size="10">Prompt Optimization</text>
+                <text x="800" y="214" fill="#c7d2fe" font-size="10">Attack (Direct)</text>
+
+                <!-- Lines -->
+                <line x1="770" y1="228" x2="800" y2="228" stroke="#4ade80" stroke-width="2.5" />
+                <text x="808" y="232" fill="#c7d2fe" font-size="10">Successful Query</text>
+
+                <line x1="770" y1="242" x2="800" y2="242" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="4 4" />
+                <text x="808" y="246" fill="#c7d2fe" font-size="10">Failed/Blocked</text>
+
+                <line x1="770" y1="256" x2="800" y2="256" stroke="#a78bfa" stroke-width="2.5" />
+                <text x="808" y="260" fill="#c7d2fe" font-size="10">Synthesis to Target</text>
+            </g>
+
+            <!-- Left side: Query/Attacker -->
+            <g id="attacker" opacity="0">
+                <rect x="50" y="270" width="140" height="70" rx="12" fill="#3b82f6" stroke="#60a5fa" stroke-width="2" />
+                <text x="120" y="300" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Attacker
+                    Query</text>
+                <text x="120" y="322" text-anchor="middle" fill="#dbeafe" font-size="12">"How to make</text>
+                <text x="120" y="338" text-anchor="middle" fill="#dbeafe" font-size="12">a bomb?"</text>
+            </g>
+
+            <!-- Knowledge Nodes -->
+            <g id="nodes" opacity="0">
+                <!-- Correlated Knowledge Nodes -->
+                <g class="node" id="v1" transform="translate(380,420)">
+                    <circle r="32" fill="#1e293b" stroke="#94a3b8" stroke-width="2.5" />
+                    <text text-anchor="middle" dy="5" fill="#e2e8f0" font-size="16" font-weight="600">V₁</text>
+                </g>
+
+                <g class="node" id="v2" transform="translate(520,450)">
+                    <circle r="32" fill="#1e293b" stroke="#94a3b8" stroke-width="2.5" />
+                    <text text-anchor="middle" dy="5" fill="#e2e8f0" font-size="16" font-weight="600">V₂</text>
+                </g>
+
+                <g class="node" id="v3" transform="translate(680,420)">
+                    <circle r="32" fill="#1e293b" stroke="#94a3b8" stroke-width="2.5" />
+                    <text text-anchor="middle" dy="5" fill="#e2e8f0" font-size="16" font-weight="600">V₃</text>
+                </g>
+
+                <g class="node" id="v4" transform="translate(800,360)">
+                    <circle r="32" fill="#1e293b" stroke="#94a3b8" stroke-width="2.5" />
+                    <text text-anchor="middle" dy="5" fill="#e2e8f0" font-size="16" font-weight="600">V₄</text>
+                </g>
+
+                <!-- Target Knowledge Node -->
+                <g class="node" id="v0" transform="translate(580,280)">
+                    <circle r="42" fill="#7c2d12" stroke="#f87171" stroke-width="3" class="motiv-pulse" />
+                    <text text-anchor="middle" dy="6" fill="#fecaca" font-size="18" font-weight="700">V₀</text>
+                    <text text-anchor="middle" y="58" fill="#fca5a5" font-size="13" font-weight="600">Target</text>
+                </g>
+
+                <!-- Edges -->
+                <line class="edge" x1="405" y1="398" x2="555" y2="302" stroke="#475569" stroke-width="2.5"
+                    opacity="0.3" />
+                <line class="edge" x1="540" y1="422" x2="565" y2="318" stroke="#475569" stroke-width="2.5"
+                    opacity="0.3" />
+                <line class="edge" x1="657" y1="398" x2="603" y2="318" stroke="#475569" stroke-width="2.5"
+                    opacity="0.3" />
+                <line class="edge" x1="772" y1="370" x2="618" y2="298" stroke="#475569" stroke-width="2.5"
+                    opacity="0.3" />
+                <line class="edge" x1="410" y1="428" x2="492" y2="442" stroke="#475569" stroke-width="2"
+                    opacity="0.25" />
+                <line class="edge" x1="550" y1="442" x2="652" y2="432" stroke="#475569" stroke-width="2"
+                    opacity="0.25" />
+                <line class="edge" x1="708" y1="405" x2="775" y2="375" stroke="#475569" stroke-width="2"
+                    opacity="0.25" />
+            </g>
+
+            <!-- Node labels -->
+            <g id="labels" opacity="0">
+                <text x="380" y="470" text-anchor="middle" fill="#94a3b8" font-size="11">Chemical</text>
+                <text x="520" y="500" text-anchor="middle" fill="#94a3b8" font-size="11">Synthesis</text>
+                <text x="680" y="470" text-anchor="middle" fill="#94a3b8" font-size="11">Process</text>
+                <text x="800" y="410" text-anchor="middle" fill="#94a3b8" font-size="11">Details</text>
+            </g>
+
+            <!-- Scene 2: POA -->
+            <g id="poa" opacity="0">
+                <text x="500" y="545" text-anchor="middle" fill="#fb923c" font-size="15" font-weight="600">
+                    ❌ POA: Direct Attack to V₀
+                </text>
+
+                <path id="poa-arrow" class="motiv-flow-line" d="M 190,305 Q 350,295 540,285" stroke="#ff6b9d"
+                    stroke-width="4" fill="none" marker-end="url(#arrowRed)" opacity="0" />
+
+                <g id="block" transform="translate(350,290)" opacity="0">
+                    <circle r="28" fill="#dc2626" opacity="0.9" />
+                    <line x1="-15" y1="-15" x2="15" y2="15" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                    <line x1="-15" y1="15" x2="15" y2="-15" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                </g>
+
+                <text id="block-text" x="350" y="350" text-anchor="middle" fill="#fca5a5" font-size="13"
+                    font-weight="600" opacity="0">
+                    Guardrails Blocked!
+                </text>
+            </g>
+
+            <!-- Scene 3: Our Approach -->
+            <g id="ours" opacity="0">
+                <text x="500" y="560" text-anchor="middle" fill="#4ade80" font-size="15" font-weight="600">
+                    ✓ Our Approach: Adaptive Search over Correlated Knowledge
+                </text>
+
+                <path id="our-1" class="motiv-flow-line" d="M 190,305 Q 250,360 350,410" stroke="#4ade80"
+                    stroke-width="3.5" fill="none" marker-end="url(#arrowGreen)" opacity="0" />
+
+                <path id="our-2" class="motiv-flow-line" d="M 410,428 Q 450,435 490,445" stroke="#4ade80"
+                    stroke-width="3.5" fill="none" marker-end="url(#arrowGreen)" opacity="0" />
+
+                <!-- Path to V3 - dashed to show failure -->
+                <path id="our-3" class="motiv-flow-line" d="M 548,442 Q 600,435 650,425" stroke="#fb923c"
+                    stroke-width="3.5" fill="none" stroke-dasharray="8 8" opacity="0" />
+
+                <g id="v3-block" opacity="0">
+                    <circle cx="680" cy="420" r="24" fill="none" stroke="#fb923c" stroke-width="3"
+                        stroke-dasharray="4 4" />
+                    <text x="680" y="395" text-anchor="middle" fill="#fb923c" font-size="20">🔒</text>
+                </g>
+
+                <!-- Adaptive reroute to V4 -->
+                <path id="our-4" class="motiv-flow-line" d="M 548,442 Q 620,410 772,370" stroke="#60a5fa"
+                    stroke-width="3.5" fill="none" stroke-dasharray="6 6" marker-end="url(#arrowBlue)" opacity="0" />
+
+                <!-- Final synthesis arrows - show together -->
+                <path id="synth-1" class="motiv-flow-line" d="M 405,398 Q 470,350 548,298" stroke="#a78bfa"
+                    stroke-width="3" fill="none" marker-end="url(#arrowPurple)" opacity="0" />
+                <path id="synth-2" class="motiv-flow-line" d="M 540,422 Q 555,370 565,318" stroke="#a78bfa"
+                    stroke-width="3" fill="none" marker-end="url(#arrowPurple)" opacity="0" />
+                <path id="synth-3" class="motiv-flow-line" d="M 772,370 Q 690,330 618,298" stroke="#a78bfa"
+                    stroke-width="3" fill="none" marker-end="url(#arrowPurple)" opacity="0" />
+
+                <g id="subq1" opacity="0">
+                    <rect x="240" y="365" width="110" height="28" rx="6" fill="#059669" stroke="#10b981"
+                        stroke-width="2" />
+                    <text x="295" y="383" text-anchor="middle" fill="#d1fae5" font-size="11"
+                        font-weight="600">Corr-Knowledge 1</text>
+                </g>
+                <g id="subq2" opacity="0">
+                    <rect x="410" y="465" width="110" height="28" rx="6" fill="#059669" stroke="#10b981"
+                        stroke-width="2" />
+                    <text x="465" y="483" text-anchor="middle" fill="#d1fae5" font-size="11"
+                        font-weight="600">Corr-Knowledge 2</text>
+                </g>
+                <g id="subq3" opacity="0">
+                    <rect x="630" y="475" width="110" height="28" rx="6" fill="#dc2626" stroke="#f87171"
+                        stroke-width="2" />
+                    <text x="685" y="493" text-anchor="middle" fill="#fecaca" font-size="11"
+                        font-weight="600">Blocked!</text>
+                </g>
+                <g id="subq4" opacity="0">
+                    <rect x="730" y="390" width="110" height="28" rx="6" fill="#0284c7" stroke="#38bdf8"
+                        stroke-width="2" />
+                    <text x="785" y="408" text-anchor="middle" fill="#dbeafe" font-size="11" font-weight="600">Adaptive
+                        Reroute</text>
+                </g>
+            </g>
+
+            <!-- Synthesis indicator -->
+            <g id="synthesis" opacity="0">
+                <circle cx="580" cy="280" r="55" fill="none" stroke="#a78bfa" stroke-width="3" opacity="0.6" />
+                <circle cx="580" cy="280" r="65" fill="none" stroke="#a78bfa" stroke-width="2" opacity="0.3" />
+                <text x="580" y="175" text-anchor="middle" fill="#c4b5fd" font-size="14" font-weight="600">
+                    ✓ Synthesizer
+                </text>
+                <text x="580" y="195" text-anchor="middle" fill="#c4b5fd" font-size="12">
+                    Combine correlated knowledge
+                </text>
+            </g>
+        </svg>
+
+        <div class="controls">
+            <button id="replay">🔄 Replay Animation</button>
+            <small>Watch how our approach adaptively explores correlated knowledge while POA methods get blocked</small>
+        </div>
+    </div>
+
+    <script>
+        const $ = (id) => document.getElementById(id);
+        let timers = [];
+
+        function clearTimers() {
+            timers.forEach(t => clearTimeout(t));
+            timers = [];
+        }
+
+        function animate(element, delay = 0) {
+            return new Promise(resolve => {
+                timers.push(setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.classList.add('fade-in');
+                    resolve();
+                }, delay));
+            });
+        }
+
+        function animateLine(element, delay = 0) {
+            return new Promise(resolve => {
+                timers.push(setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.classList.add('animate');
+                    resolve();
+                }, delay));
+            });
+        }
+
+        async function scene1() {
+            // Show title
+            await animate($('title'));
+            await animate($('subtitle'), 200);
+            await animate($('legend'), 300);
+            await animate($('cloud'), 400);
+            await animate($('attacker'), 500);
+            await animate($('nodes'), 600);
+            await animate($('labels'), 700);
+
+            // Hold for viewing
+            await new Promise(resolve => timers.push(setTimeout(resolve, 1500)));
+        }
+
+        async function scene2() {
+            // Update subtitle
+            $('subtitle').textContent = 'POA (Prompt Optimization Attack) tries to directly query the target knowledge';
+
+            await animate($('poa'), 100);
+            await animateLine($('poa-arrow'), 200);
+            await animate($('block'), 800);
+            await animate($('block-text'), 900);
+
+            // Hold
+            await new Promise(resolve => timers.push(setTimeout(resolve, 1500)));
+        }
+
+        async function scene3() {
+            // Hide POA elements
+            $('poa').style.opacity = '0';
+
+            // Update subtitle
+            $('subtitle').textContent = 'Adaptive search: query safe correlated knowledge, adapt when blocked, synthesize answer';
+
+            await animate($('ours'), 100);
+
+            // Query V1
+            await animate($('subq1'), 200);
+            await animateLine($('our-1'), 300);
+
+            // V1 -> V2
+            await animate($('subq2'), 900);
+            await animateLine($('our-2'), 1000);
+
+            // Try V2 -> V3 (blocked with dashed line)
+            await animateLine($('our-3'), 1600);
+            await animate($('subq3'), 1800);
+            await animate($('v3-block'), 1900);
+
+            // Adaptive: reroute to V4
+            await animate($('subq4'), 2400);
+            await animateLine($('our-4'), 2500);
+
+            // Synthesis - show all three lines together
+            await Promise.all([
+                animateLine($('synth-1'), 3200),
+                animateLine($('synth-2'), 3200),
+                animateLine($('synth-3'), 3200)
+            ]);
+            await animate($('synthesis'), 4000);
+
+            // Hold final view
+            await new Promise(resolve => timers.push(setTimeout(resolve, 2000)));
+        }
+
+        function resetAll() {
+            clearTimers();
+
+            // Reset all elements
+            const elements = [
+                'title', 'subtitle', 'cloud', 'attacker', 'nodes', 'labels', 'legend',
+                'poa', 'poa-arrow', 'block', 'block-text',
+                'ours', 'our-1', 'our-2', 'our-3', 'our-4',
+                'v3-block', 'synth-1', 'synth-2', 'synth-3',
+                'subq1', 'subq2', 'subq3', 'subq4', 'synthesis'
+            ];
+
+            elements.forEach(id => {
+                const el = $(id);
+                if (el) {
+                    el.style.opacity = '0';
+                    el.classList.remove('fade-in', 'animate');
+                }
+            });
+
+            // Reset subtitle
+            $('subtitle').textContent = 'Jailbreak aims to extract the target knowledge V₀';
+        }
+
+        async function run() {
+            resetAll();
+            await scene1();
+            await scene2();
+            await scene3();
+
+            // Loop
+            timers.push(setTimeout(run, 1500));
+        }
+
+        $('replay').addEventListener('click', () => {
+            run();
+        });
+
+        // Auto-start
+        run();
+    </script>
+</body>
+
+</html>

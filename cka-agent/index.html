@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKA-Agent: A Wolf in Sheep's Clothing</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="cka_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-VP2GFJFNGW');
+    </script>
+</head>
+
+<body>
+    <header class="header-nav">
+        <div class="container" style="justify-content: flex-start; display: flex;">
+            <a href="../index.html" class="home-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Main Page
+            </a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header">
+                <div class="warning-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>WARNING:</strong> This research contains potentially offensive and harmful text for academic
+                    safety research purposes.
+                </div>
+
+                <div class="date-tag">
+                    <span class="date">November 2025</span>
+                    <span class="tag">ICML 2026 Submission</span>
+                </div>
+
+                <h1 class="article-title">A Wolf in Sheep’s Clothing: Bypassing Commercial LLM Guardrails via Harmless
+                    Prompt Weaving and Adaptive Tree Search</h1>
+
+                <p class="article-abstract">
+                    We introduce <strong>CKA-Agent (Correlated Knowledge Attack Agent)</strong>, a novel framework that
+                    reformulates jailbreaking as a dynamic, tree-structured exploration of correlated knowledge.
+                    Unlike traditional prompt optimization methods that generate detectable harmful patterns, CKA-Agent
+                    issues locally innocuous queries that exploit the target model's own knowledge to adaptively
+                    construct multi-hop attack paths.
+                    Through simulation-free tree search guided by hybrid LLM evaluation, CKA-Agent achieves up to 98.8%
+                    attack success rate against state-of-the-art commercial LLMs with guardrails,
+                    substantially outperforming existing methods while remaining robust to common defense mechanisms.
+                </p>
+
+                <div class="project-links">
+                    <a href="https://github.com/Jesson-Wei/correlated-knowledge-jailbreak" class="project-link github">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="#" class="project-link arxiv">
+                        <i class="fas fa-file-alt"></i> Paper (Coming Soon)
+                    </a>
+                    <a href="#demo" class="project-link demo">
+                        <i class="fas fa-play-circle"></i> Demo
+                    </a>
+                </div>
+
+                <!-- Authors -->
+                <div class="authors-section">
+                    <div class="authors-meta">
+                        <div class="authors-title" style="text-align:left;padding-top: 10px;">AUTHORS</div>
+                        <div class="authors-list" style="text-align:left;">
+                            <span class="author">Anonymous Authors</span>
+                        </div>
+                        <div class="author-note">Under ICML 2026 Review</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Method Overview -->
+            <section class="content-section">
+                <h2>How CKA-Agent Works</h2>
+                <div class="method-description">
+                    <p>
+                        CKA-Agent reformulates jailbreaking from prompt optimization to <strong>knowledge decomposition
+                            and adaptive exploration</strong>.
+                        Instead of crafting a single malicious prompt, it dynamically discovers paths through the target
+                        model's knowledge graph by:
+                    </p>
+                    <ol>
+                        <li><strong>Issuing locally harmless queries</strong> that extract correlated knowledge pieces
+                        </li>
+                        <li><strong>Evaluating responses</strong> using hybrid introspection and feedback scoring</li>
+                        <li><strong>Branching adaptively</strong> based on UCT-guided selection to explore multiple
+                            paths</li>
+                        <li><strong>Synthesizing knowledge</strong> from successful exploration trajectories</li>
+                    </ol>
+                </div>
+                <figure class="figure-container">
+                    <img src="img/framework_method_comparison.png" alt="Method Comparison Framework" class="figure-img">
+                    <figcaption>
+                        <strong>Figure 1:</strong> Comparison of different jailbreak strategies. CKA-Agent combines the
+                        stealth of decomposition-based methods
+                        with adaptive, feedback-driven exploration, overcoming limitations of both prompt optimization
+                        and static decomposition approaches.
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- Framework Architecture -->
+            <section class="content-section">
+                <h2>CKA-Agent Architecture</h2>
+                <figure class="figure-container">
+                    <img src="img/cka_agent_framework.png" alt="CKA-Agent Framework" class="figure-img-large">
+                    <figcaption>
+                        <strong>Figure 2:</strong> The CKA-Agent framework. Each iteration performs: (1) <span
+                            class="method-step">Selection</span> via UCT policy
+                        to identify the most promising leaf node; (2) <span class="method-step">Depth-first
+                            Expansion</span> generating and executing sub-queries;
+                        (3) <span class="method-step">Hybrid Evaluation</span> combining introspection and target
+                        feedback scores;
+                        (4) <span class="method-step">Synthesis</span> of accumulated knowledge; and (5) <span
+                            class="method-step">Backpropagation</span>
+                        of failure signals to guide future exploration.
+                    </figcaption>
+                </figure>
+
+                <div class="algorithm-box">
+                    <h3>Adaptive Branching Search Algorithm</h3>
+                    <ul>
+                        <li><strong>Selection:</strong> UCT policy balances exploitation (high-feedback nodes) and
+                            exploration (less-visited branches)</li>
+                        <li><strong>Expansion:</strong> Adaptive branching factor (B=1 for clear paths, B≤3 for
+                            uncertain directions)</li>
+                        <li><strong>Evaluation:</strong> Hybrid scoring = α·(introspection) + (1-α)·(target feedback),
+                            replacing costly rollouts</li>
+                        <li><strong>Termination:</strong> Success when synthesis achieves judge score ≥ τ, or max
+                            iterations reached</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Main Results -->
+            <section class="content-section">
+                <h2>Experimental Results</h2>
+
+                <h3>Attack Success Rates on HarmBench & StrongREJECT</h3>
+                <div class="results-summary">
+                    <div class="result-card">
+                        <div class="result-number">96.8%</div>
+                        <div class="result-label">Gemini-2.5-Pro (HarmBench)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">98.8%</div>
+                        <div class="result-label">Gemini-2.5-Flash (StrongREJECT)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">97.6%</div>
+                        <div class="result-label">GPT-oss-120B (HarmBench)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">96.9%</div>
+                        <div class="result-label">Claude-Haiku-4.5 (StrongREJECT)</div>
+                    </div>
+                </div>
+
+                <p class="results-note">
+                    <strong>Key Finding:</strong> CKA-Agent achieves 15-21 percentage point improvements over the
+                    strongest baseline (Multi-Agent Jailbreak)
+                    and up to 96× improvement over prompt optimization methods on robustly defended models.
+                </p>
+
+                <h3>Defense Robustness</h3>
+                <figure class="figure-container">
+                    <img src="img/jailbreak_methods_defense_comparison.png" alt="Defense Comparison" class="figure-img">
+                    <figcaption>
+                        <strong>Figure 3:</strong> Performance across defense mechanisms (Gemini-2.5-Flash).
+                        Decomposition-based methods (Multi-Agent, CKA-Agent)
+                        maintain high success rates under LLM Guard detection, while prompt optimization approaches
+                        (PAIR, AutoDAN, PAP) suffer catastrophic failure.
+                    </figcaption>
+                </figure>
+
+                <h3>Adaptive Branching Benefits</h3>
+                <figure class="figure-container">
+                    <img src="img/adaptive_branching_results.png" alt="Adaptive Branching Results" class="figure-img">
+                    <figcaption>
+                        <strong>Figure 4:</strong> Cumulative success rates across iterations. While 70-95% of attacks
+                        succeed in the first iteration,
+                        adaptive branching enables recovery from failed trajectories, with 92-95% of eventual successes
+                        achieved within two iterations.
+                    </figcaption>
+                </figure>
+
+                <h3>Cost-Performance Trade-off</h3>
+                <figure class="figure-container">
+                    <img src="img/cost_performance_Gemini_2_5_Flash_HarmBench.png" alt="Cost Performance Analysis"
+                        class="figure-img">
+                    <figcaption>
+                        <strong>Figure 5:</strong> Attack success rate vs. resource consumption (API calls & tokens) on
+                        HarmBench.
+                        CKA-Agent achieves the Pareto frontier: highest performance with moderate cost.
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- Context-Aware Defense -->
+            <section class="content-section">
+                <h2>Insights on Context-Aware Defense</h2>
+                <p>
+                    We investigate the effectiveness of context-aware defenses where the target model has access to full
+                    conversation history.
+                    While CKA-Agent-Branch (with context sharing) shows 2-8% performance degradation compared to
+                    independent queries,
+                    it still achieves 92.1%+ success rates, revealing limitations in current LLMs' ability to aggregate
+                    intent across
+                    extended multi-turn interactions.
+                </p>
+                <div class="insight-box">
+                    <p>
+                        <strong>Defense Implication:</strong> Future guardrail systems should enhance cross-query intent
+                        aggregation and long-context reasoning
+                        to detect correlated knowledge exploitation patterns.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Human-LLM Judge Alignment -->
+            <section class="content-section">
+                <h2>Evaluation Validity</h2>
+                <figure class="figure-container">
+                    <img src="img/alignment_violin_plots.png" alt="Human-LLM Judge Alignment" class="figure-img">
+                    <figcaption>
+                        <strong>Figure 6:</strong> Alignment between human and LLM judgments improves dramatically when
+                        humans have access to judge reasoning
+                        (Spearman ρ: 0.52 → 0.90), validating our LLM-as-Judge evaluation approach.
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- Citation -->
+            <section class="content-section">
+                <h2>Citation</h2>
+                <div class="citation-box">
+                    <pre><code>
+@article{cka-agent2025,
+  title={A Wolf in Sheep’s Clothing: Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search},
+  author={Wei, Rongzhe and Niu, Peizhi and Shen, Xinjie and Tu, Tong and Li, Yifan and Wu, Ruihan and Chien, Eli and Milenkovic, Olgica and Li, Pan},
+  journal={Preprint},
+  year={2025}
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Disclaimer -->
+            <section class="content-section">
+                <div class="disclaimer-box">
+                    <h3><i class="fas fa-shield-alt"></i> Responsible Disclosure</h3>
+                    <p>
+                        This research is conducted for academic purposes to identify vulnerabilities in LLM safety
+                        systems.
+                        We have responsibly disclosed our findings to affected model providers and advocate for enhanced
+                        defense mechanisms.
+                        The code and detailed attack prompts will be released following ethical review and coordinated
+                        disclosure timelines.
+                    </p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer style="margin-top: 60px; padding: 20px 0; text-align: center; background-color: #f4f4f4;">
+        <div class="container">
+            <p class="copyright" style="font-size: 14px; color: #666;">
+                © 2025 CKA-Agent Research. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

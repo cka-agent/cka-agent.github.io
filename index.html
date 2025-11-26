@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKA-Agent: A Wolf in Sheep's Clothing</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😈</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cka-agent/cka_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-VP2GFJFNGW');
+    </script>
+</head>
+
+<body>
+    <!-- Table of Contents - Fixed Sidebar -->
+    <nav id="toc-sidebar" class="toc-sidebar">
+        <div class="toc-header">
+            <span class="toc-title">Quick Navigation</span>
+            <button id="toc-toggle" class="toc-toggle" aria-label="Toggle Table of Contents">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        <ul class="toc-list">
+            <li><a href="#motivation">💡 Motivation</a></li>
+            <li><a href="#results">📈 Experimental Results</a>
+                <ul style="margin-left: 15px; margin-top: 5px;">
+                    <li><a href="#main-attack-results" style="font-size: 13px;">Main Attack Results</a></li>
+                    <li><a href="#defense-insights" style="font-size: 13px;">Defense Insights</a></li>
+                </ul>
+            </li>
+            <li><a href="#methodology">⚙️ Methodology</a></li>
+            <li><a href="#additional-analysis">🔬 Additional Analysis</a></li>
+            <li><a href="#evaluation">✓ Evaluation Validity</a></li>
+            <li><a href="#citation">📝 Citation</a></li>
+        </ul>
+    </nav>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header">
+                <div class="warning-banner">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>WARNING:</strong> This research contains potentially offensive and harmful text for academic
+                    safety research purposes.
+                </div>
+
+                <div class="date-tag">
+                    <span class="date">November 2025</span>
+                    <span class="tag">Preprint</span>
+                </div>
+
+                <h1 class="article-title">A Wolf in Sheep’s Clothing: Bypassing Commercial LLM Guardrails via Harmless
+                    Prompt Weaving and Adaptive Tree Search</h1>
+
+                <!-- Authors -->
+                <div class="authors-section">
+                    <div class="authors-meta">
+                        <div class="authors-title" style="text-align:center; padding-top: 10px;">AUTHORS</div>
+                        <div
+                            style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; max-width: 1000px; margin: 0 auto; align-items: start;">
+                            <!-- Left column: Authors -->
+                            <div class="authors-list"
+                                style="text-align: right; padding-right: 20px; border-right: 1px solid var(--border-subtle);">
+                                <span class="author"><a href="https://jesson-wei.github.io/" target="_blank">Rongzhe
+                                        Wei</a><sup>1,*</sup></span>,
+                                <span class="author"><a href="https://liekon.github.io/" target="_blank">Peizhi
+                                        Niu</a><sup>2,*</sup></span>,
+                                <span class="author"><a href="https://xinjie-shen.com/" target="_blank">Xinjie
+                                        Shen</a><sup>1,*</sup></span>,
+                                <span class="author"><a href="https://www.linkedin.com/in/tony-tu-37bb07152/"
+                                        target="_blank">Tong Tu</a><sup>1</sup></span>,
+                                <span class="author"><a
+                                        href="https://scholar.google.com/citations?user=j8utLEgAAAAJ&hl=en"
+                                        target="_blank">Yifan Li</a><sup>3</sup></span>,
+                                <span class="author"><a href="https://sites.google.com/site/ruihanwu14/home"
+                                        target="_blank">Ruihan Wu</a><sup>4</sup></span>,
+                                <span class="author"><a href="https://sites.google.com/view/eli-chien/home"
+                                        target="_blank">Eli Chien</a><sup>5</sup></span>,
+                                <!-- <span class="author"><a href="https://sites.google.com/site/pinyuchenpage/"
+                                        target="_blank">Pin-Yu Chen</a><sup>6</sup></span>, -->
+                                <span class="author"><a href="https://publish.illinois.edu/milenkovic/"
+                                        target="_blank">Olgica Milenkovic</a><sup>2</sup></span>,
+                                <span class="author"><a href="https://sites.google.com/view/panli-purdue"
+                                        target="_blank">Pan Li</a><sup>1,†</sup></span>
+                            </div>
+                            <!-- Right column: Affiliations and notes -->
+                            <div style="text-align: left; padding-left: 20px;">
+                                <div class="author-affiliation"
+                                    style="font-size: 0.9rem; color: #666; line-height: 1.8;">
+                                    <sup>1</sup>GaTech, <sup>2</sup>UIUC, <sup>3</sup>Tsinghua, <sup>4</sup>UCSD,
+                                    <sup>5</sup>NTU
+                                </div>
+                                <div class="equal-contribution" style="margin-top: 16px; font-size: 0.85rem;">
+                                    <sup>*</sup>Equal contribution &nbsp;&nbsp; <sup>†</sup>Corresponding author
+                                </div>
+                            </div>
+                        </div>
+                        <div class="author-note" style="text-align:center; margin-top: 20px;">Preprint</div>
+                    </div>
+                </div>
+
+                <!-- Project Links -->
+                <div class="project-links" style="margin: 24px 0 32px;">
+                    <a href="https://github.com/Graph-COM/CKA-Agent" class="project-link github">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="https://github.com/Graph-COM/CKA-Agent" class="project-link arxiv">
+                        <i class="fas fa-file-alt"></i> Paper
+                    </a>
+
+                    <a href="comparison.html" class="project-link demo button">
+                        <i class="fa-solid fa-scale-balanced"></i> Check Examples
+                    </a>
+                    <a href="#citation" class="project-link cite">
+                        <i class="fas fa-quote-right"></i> Cite
+                    </a>
+                </div>
+
+                <p class="article-abstract">
+                    Current jailbreak methods focus on optimizing prompts to bypass guardrails, but these approaches
+                    fail against modern defenses that detect malicious intent. We argue that <strong>a more fundamental
+                        vulnerability lies in the interconnected nature of an LLM's internal knowledge</strong>.
+                    <strong>Restricted information can be reconstructed by weaving together a series of locally
+                        innocuous queries</strong> that individually appear benign but collectively lead to the harmful
+                    objective.
+                    <br>
+                    We introduce <strong>CKA-Agent (Correlated Knowledge Attack Agent)</strong>, a framework that
+                    operationalizes this vulnerability by reformulating jailbreaking as an <strong>adaptive tree search
+                        over the target LLM's correlated knowledge</strong>. Instead of crafting a single malicious
+                    prompt, CKA-Agent <strong>dynamically navigates the model's internal knowledge graph</strong>, using
+                    the target's own responses to guide its multi-hop attack path. Through a simulation-free tree search
+                    with a hybrid LLM evaluator, CKA-Agent achieves <strong>96-99% attack success rates</strong> against
+                    state-of-the-art commercial LLMs, representing a <strong>15-21pp gain over the best decomposition
+                        baseline</strong> and up to a <strong>96× improvement</strong> over prompt optimization methods
+                    on robustly defended models.
+                </p>
+            </div>
+
+            <!-- Motivation (Consolidated) -->
+            <section class="content-section" id="motivation">
+                <h2>💡 Motivation: Adaptive Search over Correlated Knowledge</h2>
+
+                <p style="font-size: 16px; color: #555; margin-bottom: 20px;">
+                    Target LLMs contain <strong>correlated knowledge</strong> that can be extracted through safe
+                    queries.
+                    While <strong>Prompt Optimization Attacks (POA)</strong> try to directly access target knowledge and
+                    get blocked,
+                    our approach uses <strong>adaptive search</strong> to dynamically explore correlated knowledge
+                    nodes,
+                    adapting when queries are blocked, and synthesizing the gathered information to construct the target
+                    answer.
+                </p>
+
+                <!-- Interactive Animation -->
+                <div style="margin: 30px 0;">
+                    <iframe src="motivation-animation.html" style="width: 100%; height: 680px; border: none; border-radius: 12px; 
+                                   box-shadow: 0 8px 32px rgba(0,0,0,0.2);" title="CKA-Agent Motivation Animation">
+                    </iframe>
+                </div>
+
+                <figure class="figure-container">
+                    <img src="cka-agent/img/comparsion.png" alt="Comparison of Attack Methods" class="figure-img-large">
+                    <figcaption>
+                        <strong>Figure 1:</strong> Comparison of different attack methods.
+                        (1) Prompt Optimization Attacks (POA) directly attack the target LLM but often fail due to
+                        safety guardrails.
+                        (2) Decomposition-Only Attacks (DOA) rely on prior knowledge from a limited decomposer and have
+                        a static plan.
+                        (3) CKA-Agent uses an adaptive tree search to explore correlated knowledge and dynamically
+                        adjust the attack plan.
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- Main Results -->
+            <section class="content-section" id="results">
+                <h2>Experimental Results</h2>
+
+                <h3 id="main-attack-results">Attack Success Rates on HarmBench & StrongREJECT</h3>
+                <div class="results-summary">
+                    <div class="result-card">
+                        <div class="result-number">96.8%</div>
+                        <div class="result-label">Gemini-2.5-Pro (HarmBench)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">98.8%</div>
+                        <div class="result-label">Gemini-2.5-Flash (StrongREJECT)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">97.6%</div>
+                        <div class="result-label">GPT-oss-120B (HarmBench)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-number">96.9%</div>
+                        <div class="result-label">Claude-Haiku-4.5 (StrongREJECT)</div>
+                    </div>
+                </div>
+
+                <h3>Full Comparison with All Baselines</h3>
+                <div class="table-container" style="overflow-x: auto; margin: 20px 0;">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="method-col">Method</th>
+                                <th colspan="4" class="model-header">Gemini-2.5-Flash</th>
+                                <th colspan="4" class="model-header">Gemini-2.5-Pro</th>
+                                <th colspan="4" class="model-header">GPT-oss-120B</th>
+                                <th colspan="4" class="model-header">Claude-Haiku-4.5</th>
+                            </tr>
+                            <tr>
+                                <th class="metric-col">FS↑</th>
+                                <th class="metric-col">PS↑</th>
+                                <th class="metric-col">V↓</th>
+                                <th class="metric-col">R↓</th>
+                                <th class="metric-col">FS↑</th>
+                                <th class="metric-col">PS↑</th>
+                                <th class="metric-col">V↓</th>
+                                <th class="metric-col">R↓</th>
+                                <th class="metric-col">FS↑</th>
+                                <th class="metric-col">PS↑</th>
+                                <th class="metric-col">V↓</th>
+                                <th class="metric-col">R↓</th>
+                                <th class="metric-col">FS↑</th>
+                                <th class="metric-col">PS↑</th>
+                                <th class="metric-col">V↓</th>
+                                <th class="metric-col">R↓</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="dataset-header">
+                                <td colspan="17"><strong>HarmBench Dataset</strong></td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">Vanilla</td>
+                                <td>0.151</td>
+                                <td>0.032</td>
+                                <td>0.000</td>
+                                <td>0.818</td>
+                                <td>0.222</td>
+                                <td>0.064</td>
+                                <td>0.000</td>
+                                <td>0.714</td>
+                                <td>0.048</td>
+                                <td>0.032</td>
+                                <td>0.032</td>
+                                <td>0.889</td>
+                                <td>0.008</td>
+                                <td>0.016</td>
+                                <td>0.000</td>
+                                <td>0.976</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">AutoDAN</td>
+                                <td>0.767</td>
+                                <td>0.050</td>
+                                <td>0.017</td>
+                                <td>0.167</td>
+                                <td>0.921</td>
+                                <td>0.016</td>
+                                <td>0.008</td>
+                                <td>0.056</td>
+                                <td>0.103</td>
+                                <td>0.032</td>
+                                <td>0.032</td>
+                                <td>0.833</td>
+                                <td>0.008</td>
+                                <td>0.008</td>
+                                <td>0.000</td>
+                                <td>0.984</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">PAIR</td>
+                                <td>0.810</td>
+                                <td>0.064</td>
+                                <td>0.015</td>
+                                <td>0.111</td>
+                                <td>0.905</td>
+                                <td>0.071</td>
+                                <td>0.008</td>
+                                <td>0.056</td>
+                                <td>0.278</td>
+                                <td>0.214</td>
+                                <td>0.405</td>
+                                <td>0.492</td>
+                                <td>0.032</td>
+                                <td>0.040</td>
+                                <td>0.048</td>
+                                <td>0.880</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">PAP (Logical)</td>
+                                <td>0.230</td>
+                                <td>0.040</td>
+                                <td>0.016</td>
+                                <td>0.714</td>
+                                <td>0.214</td>
+                                <td>0.040</td>
+                                <td>0.016</td>
+                                <td>0.730</td>
+                                <td>0.080</td>
+                                <td>0.056</td>
+                                <td>0.043</td>
+                                <td>0.821</td>
+                                <td>0.000</td>
+                                <td>0.008</td>
+                                <td>0.000</td>
+                                <td>0.992</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">ActorBreaker</td>
+                                <td>0.331</td>
+                                <td>0.102</td>
+                                <td>0.095</td>
+                                <td>0.472</td>
+                                <td>0.325</td>
+                                <td>0.119</td>
+                                <td>0.183</td>
+                                <td>0.373</td>
+                                <td>0.087</td>
+                                <td>0.175</td>
+                                <td>0.103</td>
+                                <td>0.635</td>
+                                <td>0.079</td>
+                                <td>0.087</td>
+                                <td>0.119</td>
+                                <td>0.714</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">X-Teaming</td>
+                                <td>0.595</td>
+                                <td>0.056</td>
+                                <td>0.016</td>
+                                <td>0.333</td>
+                                <td>0.762</td>
+                                <td>0.063</td>
+                                <td>0.008</td>
+                                <td>0.167</td>
+                                <td>0.071</td>
+                                <td>0.056</td>
+                                <td>0.071</td>
+                                <td>0.802</td>
+                                <td>0.000</td>
+                                <td>0.000</td>
+                                <td>0.000</td>
+                                <td>1.000</td>
+                            </tr>
+                            <tr class="second-best-row">
+                                <td class="method-name">Multi-Agent Jailbreak</td>
+                                <td>0.794</td>
+                                <td>0.143</td>
+                                <td>0.040</td>
+                                <td>0.024</td>
+                                <td>0.818</td>
+                                <td>0.143</td>
+                                <td>0.032</td>
+                                <td>0.008</td>
+                                <td>0.762</td>
+                                <td>0.167</td>
+                                <td>0.048</td>
+                                <td>0.024</td>
+                                <td>0.786</td>
+                                <td>0.119</td>
+                                <td>0.048</td>
+                                <td>0.048</td>
+                            </tr>
+                            <tr class="best-row">
+                                <td class="method-name"><strong>CKA-Agent (ours)</strong></td>
+                                <td><strong>0.968</strong></td>
+                                <td><strong>0.025</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.007</strong></td>
+                                <td><strong>0.968</strong></td>
+                                <td><strong>0.025</strong></td>
+                                <td><strong>0.007</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.976</strong></td>
+                                <td><strong>0.016</strong></td>
+                                <td><strong>0.008</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.960</strong></td>
+                                <td><strong>0.024</strong></td>
+                                <td><strong>0.008</strong></td>
+                                <td><strong>0.008</strong></td>
+                            </tr>
+                            <tr class="dataset-header">
+                                <td colspan="17"><strong>StrongREJECT Dataset</strong></td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">Vanilla</td>
+                                <td>0.012</td>
+                                <td>0.000</td>
+                                <td>0.000</td>
+                                <td>0.988</td>
+                                <td>0.019</td>
+                                <td>0.031</td>
+                                <td>0.000</td>
+                                <td>0.951</td>
+                                <td>0.000</td>
+                                <td>0.025</td>
+                                <td>0.019</td>
+                                <td>0.957</td>
+                                <td>0.000</td>
+                                <td>0.012</td>
+                                <td>0.000</td>
+                                <td>0.988</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">AutoDAN</td>
+                                <td>0.463</td>
+                                <td>0.037</td>
+                                <td>0.025</td>
+                                <td>0.475</td>
+                                <td>0.852</td>
+                                <td>0.012</td>
+                                <td>0.000</td>
+                                <td>0.136</td>
+                                <td>0.080</td>
+                                <td>0.025</td>
+                                <td>0.019</td>
+                                <td>0.877</td>
+                                <td>0.006</td>
+                                <td>0.000</td>
+                                <td>0.006</td>
+                                <td>0.988</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">PAIR</td>
+                                <td>0.827</td>
+                                <td>0.062</td>
+                                <td>0.019</td>
+                                <td>0.092</td>
+                                <td>0.826</td>
+                                <td>0.056</td>
+                                <td>0.012</td>
+                                <td>0.106</td>
+                                <td>0.099</td>
+                                <td>0.031</td>
+                                <td>0.019</td>
+                                <td>0.851</td>
+                                <td>0.049</td>
+                                <td>0.037</td>
+                                <td>0.025</td>
+                                <td>0.889</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">PAP (Logical)</td>
+                                <td>0.154</td>
+                                <td>0.012</td>
+                                <td>0.019</td>
+                                <td>0.815</td>
+                                <td>0.130</td>
+                                <td>0.043</td>
+                                <td>0.000</td>
+                                <td>0.827</td>
+                                <td>0.080</td>
+                                <td>0.056</td>
+                                <td>0.043</td>
+                                <td>0.821</td>
+                                <td>0.000</td>
+                                <td>0.006</td>
+                                <td>0.000</td>
+                                <td>0.994</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">ActorBreaker</td>
+                                <td>0.340</td>
+                                <td>0.111</td>
+                                <td>0.043</td>
+                                <td>0.506</td>
+                                <td>0.333</td>
+                                <td>0.093</td>
+                                <td>0.068</td>
+                                <td>0.506</td>
+                                <td>0.136</td>
+                                <td>0.167</td>
+                                <td>0.074</td>
+                                <td>0.624</td>
+                                <td>0.068</td>
+                                <td>0.080</td>
+                                <td>0.074</td>
+                                <td>0.778</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">X-Teaming</td>
+                                <td>0.679</td>
+                                <td>0.068</td>
+                                <td>0.012</td>
+                                <td>0.241</td>
+                                <td>0.809</td>
+                                <td>0.062</td>
+                                <td>0.019</td>
+                                <td>0.111</td>
+                                <td>0.130</td>
+                                <td>0.093</td>
+                                <td>0.031</td>
+                                <td>0.747</td>
+                                <td>0.000</td>
+                                <td>0.000</td>
+                                <td>0.000</td>
+                                <td>1.000</td>
+                            </tr>
+                            <tr class="second-best-row">
+                                <td class="method-name">Multi-Agent Jailbreak</td>
+                                <td>0.827</td>
+                                <td>0.099</td>
+                                <td>0.019</td>
+                                <td>0.056</td>
+                                <td>0.790</td>
+                                <td>0.099</td>
+                                <td>0.037</td>
+                                <td>0.074</td>
+                                <td>0.772</td>
+                                <td>0.167</td>
+                                <td>0.037</td>
+                                <td>0.025</td>
+                                <td>0.815</td>
+                                <td>0.099</td>
+                                <td>0.025</td>
+                                <td>0.062</td>
+                            </tr>
+                            <tr class="best-row">
+                                <td class="method-name"><strong>CKA-Agent (ours)</strong></td>
+                                <td><strong>0.988</strong></td>
+                                <td><strong>0.006</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.006</strong></td>
+                                <td><strong>0.951</strong></td>
+                                <td><strong>0.043</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.006</strong></td>
+                                <td><strong>0.982</strong></td>
+                                <td><strong>0.012</strong></td>
+                                <td><strong>0.006</strong></td>
+                                <td><strong>0.000</strong></td>
+                                <td><strong>0.969</strong></td>
+                                <td><strong>0.025</strong></td>
+                                <td><strong>0.006</strong></td>
+                                <td><strong>0.000</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size: 14px; color: #666; margin-top: 10px;">
+                    <strong>Metrics:</strong> FS = Full Success, PS = Partial Success, V = Vacuous, R = Refusal.
+                    ↑ means higher is better, ↓ means lower is better.
+                    <span style="background-color: #ffeef0; padding: 2px 5px; border-radius: 3px;">Best results
+                        highlighted</span>,
+                    <span style="background-color: #e3f2fd; padding: 2px 5px; border-radius: 3px;">second-best in
+                        blue</span>.
+                </p>
+
+                <div class="method-description"
+                    style="background-color: #fffbeb; padding: 15px; border-left: 4px solid #d97706; margin: 30px 0;">
+                    <h3 style="margin-top: 0; font-size: 16px;">⚙️ Evaluation Setup</h3>
+                    <p style="margin-bottom: 8px;"><strong>Datasets:</strong> HarmBench (126 behaviors) + StrongREJECT
+                        (162 prompts) = 288 high-stakes harmful prompts</p>
+                    <p style="margin-bottom: 8px;"><strong>Target Models:</strong> Gemini-2.5-Flash, Gemini-2.5-Pro,
+                        GPT-oss-120B, Claude-Haiku-4.5</p>
+                    <p style="margin-bottom: 8px;"><strong>Attacker Model:</strong> Qwen3-32B-abliterated (for all
+                        methods requiring auxiliary models)</p>
+                    <p style="margin-bottom: 8px;"><strong>Judge Model:</strong> Gemini-2.5-Flash with 4-level rubric
+                        (Full Success, Partial Success, Vacuous, Refusal)</p>
+                    <p style="margin-bottom: 0;"><strong>Note:</strong> All evaluation details, including judge prompts
+                        and scoring rubrics, are available in the <a href="https://arxiv.org/" target="_blank"
+                            style="color: #d97706; text-decoration: underline;">arXiv paper</a>. All experiments were
+                        conducted during Oct-Nov 2025.</p>
+                </div>
+
+                <p class="results-note">
+                    <strong>Key Findings:</strong>
+                </p>
+                <ul class="results-note" style="list-style-type: disc; margin-left: 20px;">
+                    <li><strong>POA Catastrophic Failure:</strong> Prompt optimization methods (PAIR, AutoDAN, PAP)
+                        collapse on robustly defended models.
+                        PAIR drops from 90.5% → 3.2% on Claude-Haiku-4.5, revealing that harmful intent remains
+                        semantically detectable regardless of algorithmic sophistication.</li>
+                    <li><strong>DOA Superiority:</strong> Decomposition-based methods maintain consistent performance
+                        across all targets.
+                        Multi-Agent Jailbreak achieves 76.2%–81.8%, representing <strong>24× improvement over
+                            PAIR</strong> on the most defended model.</li>
+                    <li><strong>CKA-Agent SOTA:</strong> Achieves <strong>15-21 percentage point gains</strong> over
+                        Multi-Agent Jailbreak and up to <strong>96× improvement</strong>
+                        over POA methods on robustly defended models through adaptive exploration that dynamically
+                        learns from target responses.</li>
+                    <li><strong>Critical Vulnerability Exposed:</strong> Current guardrails effectively detect optimized
+                        harmful prompts but cannot aggregate intent
+                        across adaptively constructed innocuous queries.</li>
+                </ul>
+
+                <h3 id="defense-insights">Context-Aware Defense: CKA-Agent vs CKA-Agent-Branch</h3>
+                <p>
+                    <strong>Research Question:</strong> Can providing conversation history help target models detect
+                    correlated knowledge attacks?
+                </p>
+                <div class="method-description"
+                    style="background-color: #fff8e1; padding: 15px; border-left: 4px solid #ff9800; margin: 15px 0;">
+                    <p style="margin: 0;"><strong>Experimental Setup:</strong></p>
+                    <ul style="margin: 10px 0 0 20px;">
+                        <li><strong>CKA-Agent:</strong> Each sub-query sent independently (no history)</li>
+                        <li><strong>CKA-Agent-Branch:</strong> Each sub-query includes full conversation history from
+                            its branch</li>
+                    </ul>
+                </div>
+
+                <div style="overflow-x: auto; margin: 20px 0;">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Dataset</th>
+                                <th>CKA-Agent</th>
+                                <th>CKA-Agent-Branch</th>
+                                <th>Degradation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="method-name">Gemini-2.5-Flash</td>
+                                <td>HarmBench</td>
+                                <td><strong>96.8%</strong></td>
+                                <td>92.1%</td>
+                                <td>-4.7%</td>
+                            </tr>
+                            <tr>
+                                <td class="method-name">Gemini-2.5-Flash</td>
+                                <td>StrongREJECT</td>
+                                <td><strong>98.8%</strong></td>
+                                <td>96.9%</td>
+                                <td>-1.9%</td>
+                            </tr>
+                            <tr>
+                                <td class="method-name">GPT-oss-120B</td>
+                                <td>HarmBench</td>
+                                <td><strong>97.6%</strong></td>
+                                <td>78.6%</td>
+                                <td>-19.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="method-name">Claude-Haiku-4.5</td>
+                                <td>HarmBench</td>
+                                <td><strong>96.0%</strong></td>
+                                <td>88.9%</td>
+                                <td>-7.1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="results-note" style="margin-top: 20px;">
+                    <strong>🔍 Defense Insights:</strong> While context-aware defense degrades performance by 2-19%,
+                    CKA-Agent-Branch still achieves <strong>78.6%+ success rates</strong> across all models.
+                    This reveals <strong>current LLMs struggle to aggregate intent across multi-turn
+                        interactions</strong>,
+                    even with full conversation history.
+                </p>
+
+                <div class="insight-box">
+                    <p><strong>💡 Defense Implication:</strong> Future guardrails must enhance cross-query intent
+                        aggregation and long-context reasoning.</p>
+                </div>
+            </section>
+
+            <!-- Methodology Section -->
+            <section class="content-section" id="methodology">
+                <h2>⚙️ Methodology</h2>
+
+                <h3>How CKA-Agent Works</h3>
+                <p>
+                    CKA-Agent reformulates jailbreaking from static prompt optimization to <strong>dynamic knowledge
+                        decomposition and adaptive tree search</strong>.
+                    The framework operates through iterative exploration cycles:
+                </p>
+                <ol>
+                    <li><strong>Generate locally harmless sub-queries</strong> that extract correlated knowledge from
+                        the target model</li>
+                    <li><strong>Execute queries</strong> against the target and collect responses</li>
+                    <li><strong>Evaluate responses</strong> using hybrid scoring (introspection + target feedback)</li>
+                    <li><strong>Branch adaptively</strong> based on UCT-guided selection to explore multiple promising
+                        paths</li>
+                    <li><strong>Synthesize accumulated knowledge</strong> from successful exploration trajectories</li>
+                    <li><strong>Backpropagate failure signals</strong> to guide future iterations toward unexplored
+                        high-value regions</li>
+                </ol>
+
+                <h3 style="margin-top: 40px;">CKA-Agent Architecture</h3>
+                <figure class="figure-container">
+                    <img src="cka-agent/img/cka_agent_framework.png" alt="CKA-Agent Framework" class="figure-img-large">
+                    <figcaption>
+                        <strong>Figure 2:</strong> The CKA-Agent framework architecture. Each iteration performs:
+                        (1) <span class="method-step">Selection</span> via UCT policy to identify the most promising
+                        leaf node from the entire tree;
+                        (2) <span class="method-step">Depth-First Expansion</span> generating and executing sub-queries
+                        until reaching a terminal state;
+                        (3) <span class="method-step">Hybrid Evaluation</span> combining introspection scores (query
+                        quality) and target feedback scores (response informativeness);
+                        (4) <span class="method-step">Synthesis</span> of accumulated knowledge along the explored path;
+                        (5) <span class="method-step">Backpropagation</span> of failure signals to guide subsequent
+                        iterations toward unexplored regions.
+                    </figcaption>
+                </figure>
+
+                <div class="algorithm-box">
+                    <h3>Adaptive Branching Search Algorithm</h3>
+                    <ul>
+                        <li><strong>Selection:</strong> Global UCT policy selects the single most promising leaf:
+                            argmax(f_v + c√(ln N_parent / N_v))</li>
+                        <li><strong>Expansion:</strong> Depth-first expansion with adaptive branching (B=1 for confident
+                            paths, B≤3 for uncertainty)</li>
+                        <li><strong>Evaluation:</strong> Hybrid scoring = α·(introspection) + (1-α)·(target feedback),
+                            replacing costly MCTS rollouts</li>
+                        <li><strong>Termination:</strong> Success when synthesis achieves judge score ≥ τ; otherwise
+                            backpropagate and iterate</li>
+                        <li><strong>Efficiency:</strong> 70-95% first-iteration success; 92-95% success within two
+                            iterations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Additional Analysis -->
+            <section class="content-section" id="additional-analysis">
+                <h2>Additional Analysis</h2>
+
+                <h3>Defense Robustness: POA vs DOA Under Guardrails</h3>
+                <figure class="figure-container">
+                    <img src="cka-agent/img/jailbreak_methods_defense_comparison.png" alt="Defense Comparison"
+                        class="figure-img">
+                    <figcaption>
+                        <strong>Figure 3:</strong> Performance across defense mechanisms (Target: Gemini-2.5-Flash).
+                        <strong>LLM Guard Detection:</strong> POA methods (AutoDAN, PAIR, PAP, ActorBreaker, X-Teaming)
+                        suffer catastrophic failure due to prompt interception,
+                        while DOA methods (Multi-Agent, CKA-Agent) maintain near-perfect success rates since sub-queries
+                        are individually benign.
+                        <strong>Mutation Defenses (Rephrasing, Perturbation):</strong> Minimal impact on most methods;
+                        modern LLMs exhibit strong tolerance to lexical perturbations.
+                        Only AutoDAN's evolutionary patterns are significantly disrupted.
+                    </figcaption>
+                </figure>
+
+                <h3>Adaptive Branching: Progressive Recovery from Failures</h3>
+                <figure class="figure-container">
+                    <img src="cka-agent/img/adaptive_branching_results.png" alt="Adaptive Branching Results"
+                        class="figure-img">
+                    <figcaption>
+                        <strong>Figure 4:</strong> Cumulative success rates across iterations (ablation study).
+                        <strong>First-iteration performance:</strong> 70-95% success demonstrates effective core
+                        design—the attack agent successfully leverages target responses
+                        while the hybrid evaluator distinguishes high-quality knowledge extraction from refusals.
+                        <strong>Multi-iteration robustness:</strong> When sub-queries are blocked or yield low-quality
+                        responses, UCT-based selection identifies the most promising
+                        unexplored nodes to initiate new trajectories. <strong>92-95% of eventual successes occur within
+                            two iterations</strong>, validating both efficiency
+                        and the fundamental value of tree-structured adaptive recovery.
+                    </figcaption>
+                </figure>
+
+                <h3>Cost-Performance Trade-off: Pareto Optimality</h3>
+                <figure class="figure-container">
+                    <img src="cka-agent/img/cost_performance_Gemini_2_5_Flash_HarmBench.png"
+                        alt="Cost Performance Analysis" class="figure-img">
+                    <figcaption>
+                        <strong>Figure 5:</strong> Attack success rate vs. resource consumption on HarmBench (Target:
+                        Gemini-2.5-Flash).
+                        X-axis shows API calls (left) and total tokens (right) per sample; Y-axis shows Full Success
+                        Rate.
+                        <strong>CKA-Agent achieves the Pareto frontier:</strong> highest attack success rate (96.8%)
+                        with moderate cost.
+                        Competing methods either sacrifice performance to reduce cost or expend far more resources
+                        without matching CKA-Agent's effectiveness.
+                        This reflects the efficiency of adaptive branching search, which minimizes redundant queries and
+                        focuses exploration on promising knowledge paths.
+                    </figcaption>
+                </figure>
+
+                <details>
+                    <summary
+                        style="cursor: pointer; font-weight: 500; padding: 10px; background-color: #f0f0f0; border-radius: 5px; margin-top: 15px; display: block; text-align: center;">
+                        Show More Cost-Performance Analysis Figures
+                    </summary>
+                    <div style="padding-top: 15px;">
+                        <figure class="figure-container">
+                            <img src="cka-agent/img/cost_performance_Gemini_2_5_Pro_HarmBench.png"
+                                alt="Cost Performance Analysis" class="figure-img">
+                            <figcaption>
+                                <strong>Figure 6:</strong> Attack success rate vs. resource consumption on HarmBench
+                                (Target:
+                                Gemini-2.5-Pro).
+                            </figcaption>
+                        </figure>
+
+                        <figure class="figure-container">
+                            <img src="cka-agent/img/cost_performance_GPT-OSS_120B_HarmBench.png"
+                                alt="Cost Performance Analysis" class="figure-img">
+                            <figcaption>
+                                <strong>Figure 7:</strong> Attack success rate vs. resource consumption on HarmBench
+                                (Target:
+                                GPT-oss-120B).
+                            </figcaption>
+                        </figure>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Human-LLM Judge Alignment -->
+            <section class="content-section" id="evaluation">
+                <h2>Evaluation Validity: Human-LLM Judge Alignment</h2>
+                <p>
+                    To validate our LLM-as-Judge evaluation methodology, we conducted a human evaluation study with 40
+                    randomly sampled cases
+                    using a between-subjects design:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li><strong>Condition 1 (No Reasoning):</strong> 5 annotators evaluate responses with only prompts
+                        and outputs</li>
+                    <li><strong>Condition 2 (With Reasoning):</strong> 5 different annotators have access to the judge
+                        model's analytical reasoning (but not its final score)</li>
+                </ul>
+
+                <figure class="figure-container">
+                    <img src="cka-agent/img/alignment_violin_plots.png" alt="Human-LLM Judge Alignment"
+                        class="figure-img">
+                    <figcaption>
+                        <strong>Figure 8:</strong> Alignment between human and LLM judgments shows dramatic improvement
+                        when humans access judge reasoning.
+                        <strong>Spearman correlation increases from ρ=0.52 → 0.90</strong>.
+                        Without reasoning, human judgments exhibit high variance and systematic leniency bias—accurately
+                        assessing jailbreak response actionability
+                        requires domain-specific knowledge that annotators lack without independent research.
+                        When provided with the judge model's analytical reasoning, humans reach conclusions closely
+                        aligned with the LLM's assessments,
+                        indicating discrepancies stem from <strong>information asymmetry</strong> rather than
+                        fundamental disagreement on evaluation criteria.
+                        This validates our reliance on SOTA LLMs as automated judges for both scalability and
+                        reliability.
+                    </figcaption>
+                </figure>
+            </section>
+
+            <!-- Citation -->
+            <section class="content-section" id="citation">
+                <h2>Citation</h2>
+                <div class="citation-box">
+                    <pre><code>@article{cka-agent2025,
+  title={A Wolf in Sheep’s Clothing: Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search},
+  author={Wei, Rongzhe and Niu, Peizhi and Shen, Xinjie and Tu, Tong and Li, Yifan and Wu, Ruihan and Chien, Eli and Milenkovic, Olgica and Li, Pan},
+  journal={Preprint},
+  year={2025}
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Disclaimer -->
+            <section class="content-section">
+                <div class="disclaimer-box">
+                    <h3><i class="fas fa-shield-alt"></i> Responsible Disclosure</h3>
+                    <p>
+                        This research is conducted for academic purposes to identify vulnerabilities in LLM safety
+                        systems.
+                        We have responsibly disclosed our findings to affected model providers and advocate for enhanced
+                        defense mechanisms.
+                        The code and detailed attack prompts will be released following ethical review and coordinated
+                        disclosure timelines.
+                    </p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer style="margin-top: 60px; padding: 20px 0; text-align: center; background-color: #f4f4f4;">
+        <div class="container">
+            <p class="copyright" style="font-size: 14px; color: #666;">
+                © 2025 CKA-Agent Research. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <style>
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: fixed;
+            top: 20px;
+            right: -280px;
+            width: 260px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .toc-sidebar.active {
+            right: 20px;
+        }
+
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .toc-toggle {
+            background: #d97706;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, transform 0.3s;
+        }
+
+        .toc-toggle:hover {
+            background: #b45309;
+        }
+
+        .toc-sidebar.active .toc-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            margin: 0;
+        }
+
+        .toc-list a {
+            display: block;
+            padding: 10px 20px;
+            color: #555;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.2s, color 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-list a:hover {
+            background-color: #fffbeb;
+            color: #d97706;
+            border-left-color: #d97706;
+        }
+
+        .toc-list a.active {
+            background-color: #fffbeb;
+            color: #d97706;
+            font-weight: 600;
+            border-left-color: #d97706;
+        }
+
+        /* Floating TOC Button for Mobile */
+        .toc-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: #d97706;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .toc-fab:hover {
+            background: #b45309;
+            transform: scale(1.1);
+        }
+
+        .toc-fab.hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .toc-fab {
+                display: flex;
+            }
+
+            .toc-sidebar {
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .toc-sidebar.active {
+                right: 0;
+            }
+        }
+
+        /* Results Table Styles */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .results-table th {
+            background-color: #f8f9fa;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
+            font-size: 12px;
+        }
+
+        .results-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        .model-header {
+            background-color: #e9ecef !important;
+            color: #495057;
+        }
+
+        .metric-col {
+            background-color: #f1f3f5 !important;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .method-col {
+            min-width: 120px;
+            text-align: left !important;
+            background-color: #f8f9fa !important;
+        }
+
+        .method-name {
+            text-align: left !important;
+            font-weight: 500;
+            padding-left: 15px !important;
+        }
+
+        .dataset-header td {
+            background-color: #dee2e6 !important;
+            font-weight: 600;
+            text-align: center !important;
+            padding: 8px !important;
+        }
+
+        .best-row {
+            background-color: #ffeef0;
+        }
+
+        .best-row td {
+            font-weight: 600;
+            color: #c92a2a;
+        }
+
+        .second-best-row {
+            background-color: #e3f2fd;
+        }
+
+        .baseline-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll padding for fixed header */
+        section {
+            scroll-margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        // Table of Contents functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const tocSidebar = document.getElementById('toc-sidebar');
+            const tocToggle = document.getElementById('toc-toggle');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            // Toggle sidebar
+            tocToggle.addEventListener('click', function () {
+                tocSidebar.classList.toggle('active');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768) {
+                    if (!tocSidebar.contains(e.target) && tocSidebar.classList.contains('active')) {
+                        tocSidebar.classList.remove('active');
+                    }
+                }
+            });
+
+            // Highlight active section on scroll
+            function highlightActiveSection() {
+                const sections = document.querySelectorAll('section[id]');
+                const scrollPos = window.scrollY + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightActiveSection);
+            highlightActiveSection(); // Initial highlight
+
+            // Smooth scroll and close sidebar on click
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    if (window.innerWidth <= 768) {
+                        setTimeout(() => {
+                            tocSidebar.classList.remove('active');
+                        }, 300);
+                    }
+                });
+            });
+
+            // Auto-show sidebar on desktop
+            if (window.innerWidth > 768) {
+                setTimeout(() => {
+                    tocSidebar.classList.add('active');
+                }, 500);
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
