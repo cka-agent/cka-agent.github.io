@@ -1,6 +1,6 @@
 # CKA-Agent Research Website
 
-<a href="" target="_blank">
+<a href="https://arxiv.org/abs/2512.01353" target="_blank">
     <img alt="arXiv" src="https://img.shields.io/badge/arXiv-CKA_Agent-red?logo=arxiv&style=for-the-badge" />
 </a>
 <a href="https://cka-agent.github.io/" target="_blank">
@@ -33,5 +33,13 @@ python -m http.server 8080
 If you find CKA-Agent useful in your research, please consider citing:
 
 ```bibtex
-
+@misc{wei2025wolfsheepsclothingbypassing,
+      title={A Wolf in Sheep's Clothing: Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search}, 
+      author={Rongzhe Wei and Peizhi Niu and Xinjie Shen and Tony Tu and Yifan Li and Ruihan Wu and Eli Chien and Olgica Milenkovic and Pan Li},
+      year={2025},
+      eprint={2512.01353},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2512.01353}, 
+}
 ```
