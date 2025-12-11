@@ -4,23 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CKA-Agent: A novel framework for bypassing LLM guardrails via correlated knowledge attack and adaptive tree search. Achieves 96-99% attack success rates against state-of-the-art commercial LLMs.">
+    <meta name="keywords" content="LLM, jailbreak, AI safety, machine learning, adversarial attacks, guardrails">
+    <meta name="author" content="CKA-Agent Research Team">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="CKA-Agent: The Trojan Knowledge">
+    <meta property="og:description"
+        content="Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
     <title>CKA-Agent: The Trojan Knowledge</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😈</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="cka-agent/cka_style.css" as="style">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cka-agent/cka_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-VP2GFJFNGW');
+    </script>
+
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Inline critical CSS to prevent FOUC */
+        body {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            margin: 0;
+        }
+
+        .article-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .warning-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+    </style>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "The Trojan Knowledge: Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search",
+        "description": "CKA-Agent: A novel framework for bypassing LLM guardrails via correlated knowledge attack and adaptive tree search. Achieves 96-99% attack success rates against state-of-the-art commercial LLMs.",
+        "author": {
+            "@type": "Organization",
+            "name": "CKA-Agent Research Team"
+        },
+        "datePublished": "2025-11",
+        "publisher": {
+            "@type": "Organization",
+            "name": "CKA-Agent"
+        },
+        "keywords": ["LLM", "jailbreak", "AI safety", "machine learning", "adversarial attacks"]
+    }
     </script>
 </head>
 
@@ -51,8 +117,8 @@
     <main class="article-container">
         <article>
             <div class="article-header">
-                <div class="warning-banner">
-                    <i class="fas fa-exclamation-triangle"></i>
+                <div class="warning-banner" role="alert">
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                     <strong>WARNING:</strong> This research contains potentially offensive and harmful text for academic
                     safety research purposes.
                 </div>
@@ -176,12 +242,15 @@
                 <!-- Interactive Animation -->
                 <div style="margin: 30px 0;">
                     <iframe src="motivation-animation.html" style="width: 100%; height: 680px; border: none; border-radius: 12px; 
-                                   box-shadow: 0 8px 32px rgba(0,0,0,0.2);" title="CKA-Agent Motivation Animation">
+                                   box-shadow: 0 8px 32px rgba(0,0,0,0.2);" title="CKA-Agent Motivation Animation"
+                        loading="lazy">
                     </iframe>
                 </div>
 
                 <figure class="figure-container">
-                    <img src="cka-agent/img/comparsion.png" alt="Comparison of Attack Methods" class="figure-img-large">
+                    <img src="cka-agent/img/comparsion.png"
+                        alt="Comparison of POA, DOA, and CKA-Agent attack methods showing different approaches to LLM jailbreaking"
+                        class="figure-img-large" loading="lazy" width="1000" height="600">
                     <figcaption>
                         <strong>Figure 1:</strong> Comparison of different attack methods.
                         (1) Prompt Optimization Attacks (POA) directly attack the target LLM but often fail due to
@@ -707,7 +776,9 @@
 
                 <h3 style="margin-top: 40px;">CKA-Agent Architecture</h3>
                 <figure class="figure-container">
-                    <img src="cka-agent/img/cka_agent_framework.png" alt="CKA-Agent Framework" class="figure-img-large">
+                    <img src="cka-agent/img/cka_agent_framework.png"
+                        alt="CKA-Agent framework showing Selection, Expansion, Evaluation, Synthesis, and Backpropagation phases"
+                        class="figure-img-large" loading="lazy" width="1000" height="600">
                     <figcaption>
                         <strong>Figure 2:</strong> The CKA-Agent framework architecture. Each iteration performs:
                         (1) <span class="method-step">Selection</span> via UCT policy to identify the most promising
@@ -745,8 +816,9 @@
 
                 <h3>Defense Robustness: POA vs DOA Under Guardrails</h3>
                 <figure class="figure-container">
-                    <img src="cka-agent/img/jailbreak_methods_defense_comparison.png" alt="Defense Comparison"
-                        class="figure-img">
+                    <img src="cka-agent/img/jailbreak_methods_defense_comparison.png"
+                        alt="Defense mechanism comparison showing POA methods failing under LLM Guard while DOA methods maintain success"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 3:</strong> Performance across defense mechanisms (Target: Gemini-2.5-Flash).
                         <strong>LLM Guard Detection:</strong> POA methods (AutoDAN, PAIR, PAP, ActorBreaker, X-Teaming)
@@ -761,8 +833,9 @@
 
                 <h3>Adaptive Branching: Progressive Recovery from Failures</h3>
                 <figure class="figure-container">
-                    <img src="cka-agent/img/adaptive_branching_results.png" alt="Adaptive Branching Results"
-                        class="figure-img">
+                    <img src="cka-agent/img/adaptive_branching_results.png"
+                        alt="Cumulative success rates showing 92-95% of successes achieved within two iterations"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 4:</strong> Cumulative success rates across iterations (ablation study).
                         <strong>First-iteration performance:</strong> 70-95% success demonstrates effective core
@@ -779,7 +852,8 @@
                 <h3>Cost-Performance Trade-off: Pareto Optimality</h3>
                 <figure class="figure-container">
                     <img src="cka-agent/img/cost_performance_Gemini_2_5_Flash_HarmBench.png"
-                        alt="Cost Performance Analysis" class="figure-img">
+                        alt="Cost vs performance scatter plot showing CKA-Agent achieves Pareto frontier"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 5:</strong> Attack success rate vs. resource consumption on HarmBench (Target:
                         Gemini-2.5-Flash).
@@ -802,7 +876,8 @@
                     <div style="padding-top: 15px;">
                         <figure class="figure-container">
                             <img src="cka-agent/img/cost_performance_Gemini_2_5_Pro_HarmBench.png"
-                                alt="Cost Performance Analysis" class="figure-img">
+                                alt="Cost performance analysis for Gemini-2.5-Pro on HarmBench" class="figure-img"
+                                loading="lazy" width="800" height="500">
                             <figcaption>
                                 <strong>Figure 6:</strong> Attack success rate vs. resource consumption on HarmBench
                                 (Target:
@@ -812,7 +887,8 @@
 
                         <figure class="figure-container">
                             <img src="cka-agent/img/cost_performance_GPT-OSS_120B_HarmBench.png"
-                                alt="Cost Performance Analysis" class="figure-img">
+                                alt="Cost performance analysis for GPT-oss-120B on HarmBench" class="figure-img"
+                                loading="lazy" width="800" height="500">
                             <figcaption>
                                 <strong>Figure 7:</strong> Attack success rate vs. resource consumption on HarmBench
                                 (Target:
@@ -839,8 +915,9 @@
                 </ul>
 
                 <figure class="figure-container">
-                    <img src="cka-agent/img/alignment_violin_plots.png" alt="Human-LLM Judge Alignment"
-                        class="figure-img">
+                    <img src="cka-agent/img/alignment_violin_plots.png"
+                        alt="Violin plots showing Spearman correlation improving from 0.52 to 0.90 with reasoning access"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 8:</strong> Alignment between human and LLM judgments shows dramatic improvement
                         when humans access judge reasoning.
@@ -1190,7 +1267,7 @@
         });
     </script>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>

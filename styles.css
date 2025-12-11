@@ -47,16 +47,23 @@
     box-sizing: border-box;
 }
 
+/* Performance optimization: reduce paint and layout */
+img,
+iframe {
+    content-visibility: auto;
+}
+
 /* Typography - System fonts for professional look */
 body {
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     line-height: 1.7;
     color: var(--text-primary);
     background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
-    height: 100vh;
+    min-height: 100vh;
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
 }
 
 /* Headings - Sans-serif for contrast */
@@ -121,6 +128,7 @@ ul {
 }
 
 img {
+    width: 100%;
     max-width: 100%;
     height: auto;
     display: block;

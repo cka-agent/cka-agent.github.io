@@ -4,14 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CKA-Agent Leaderboard: Compare attack and defense methods for LLM jailbreaking. View success rates across different models and defense mechanisms.">
+    <meta name="keywords" content="LLM leaderboard, jailbreak benchmark, AI safety evaluation">
+    <meta name="author" content="CKA-Agent Research Team">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="CKA-Agent: Leaderboard">
+    <meta property="og:description" content="Compare attack and defense methods for LLM jailbreaking">
+    <meta property="og:type" content="website">
     <title>CKA-Agent: Leaderboard</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <style>
         .leaderboard-container {
             max-width: 1200px;
@@ -374,7 +395,7 @@
                     <h2><i class="fas fa-bomb"></i> Model Vulnerability to CKA</h2>
                 </div>
                 <div class="leaderboard-description">
-                    Target model vulnerability ranking against CKA-Agent attack (Lower ASR is Better)
+                    Target model vulnerability ranking against CKA-Agent attack (Lower ASR is Better, ideally 0.0)
                 </div>
                 <table class="leaderboard-table">
                     <thead>
@@ -452,7 +473,7 @@
                     <h2><i class="fas fa-shield-alt"></i> Defense Leaderboard</h2>
                 </div>
                 <div class="leaderboard-description">
-                    Effectiveness of defense mechanisms against CKA-Agent (Lower ASR is Better)
+                    Effectiveness of defense mechanisms against CKA-Agent (Lower ASR is Better, ideally 0.0)
                 </div>
                 <table class="leaderboard-table">
                     <thead>
@@ -658,13 +679,13 @@
     </div>
 
     <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-VP2GFJFNGW');
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
 
     <!-- Toggle Collapse Script -->
     <script>

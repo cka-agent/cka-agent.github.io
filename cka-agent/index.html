@@ -4,22 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CKA-Agent: Correlated Knowledge Attack Agent - A novel framework for bypassing LLM guardrails via harmless prompt weaving and adaptive tree search.">
+    <meta name="keywords" content="LLM, jailbreak, AI safety, machine learning, adversarial attacks">
+    <meta name="author" content="CKA-Agent Research Team">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="CKA-Agent: The Trojan Knowledge">
+    <meta property="og:description"
+        content="Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search">
+    <meta property="og:type" content="website">
     <title>CKA-Agent: The Trojan Knowledge</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😈</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../styles.css" as="style">
+    <link rel="preload" href="cka_style.css" as="style">
+
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="cka_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-VP2GFJFNGW');
     </script>
+
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        body {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            margin: 0;
+        }
+
+        .article-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .warning-banner {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+
+        .header-nav {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,7 +158,9 @@
                     </ol>
                 </div>
                 <figure class="figure-container">
-                    <img src="img/framework_method_comparison.png" alt="Method Comparison Framework" class="figure-img">
+                    <img src="img/framework_method_comparison.png"
+                        alt="Comparison of jailbreak strategies showing CKA-Agent's adaptive approach vs prompt optimization and static decomposition"
+                        class="figure-img" loading="lazy" width="800" height="450">
                     <figcaption>
                         <strong>Figure 1:</strong> Comparison of different jailbreak strategies. CKA-Agent combines the
                         stealth of decomposition-based methods
@@ -120,7 +174,9 @@
             <section class="content-section">
                 <h2>CKA-Agent Architecture</h2>
                 <figure class="figure-container">
-                    <img src="img/cka_agent_framework.png" alt="CKA-Agent Framework" class="figure-img-large">
+                    <img src="img/cka_agent_framework.png"
+                        alt="CKA-Agent framework architecture showing Selection, Expansion, Evaluation, Synthesis, and Backpropagation phases"
+                        class="figure-img-large" loading="lazy" width="1000" height="600">
                     <figcaption>
                         <strong>Figure 2:</strong> The CKA-Agent framework. Each iteration performs: (1) <span
                             class="method-step">Selection</span> via UCT policy
@@ -181,7 +237,9 @@
 
                 <h3>Defense Robustness</h3>
                 <figure class="figure-container">
-                    <img src="img/jailbreak_methods_defense_comparison.png" alt="Defense Comparison" class="figure-img">
+                    <img src="img/jailbreak_methods_defense_comparison.png"
+                        alt="Performance comparison across defense mechanisms showing CKA-Agent maintaining high success rates"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 3:</strong> Performance across defense mechanisms (Gemini-2.5-Flash).
                         Decomposition-based methods (Multi-Agent, CKA-Agent)
@@ -192,7 +250,9 @@
 
                 <h3>Adaptive Branching Benefits</h3>
                 <figure class="figure-container">
-                    <img src="img/adaptive_branching_results.png" alt="Adaptive Branching Results" class="figure-img">
+                    <img src="img/adaptive_branching_results.png"
+                        alt="Cumulative success rates showing adaptive branching enables recovery from failed trajectories"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 4:</strong> Cumulative success rates across iterations. While 70-95% of attacks
                         succeed in the first iteration,
@@ -203,8 +263,9 @@
 
                 <h3>Cost-Performance Trade-off</h3>
                 <figure class="figure-container">
-                    <img src="img/cost_performance_Gemini_2_5_Flash_HarmBench.png" alt="Cost Performance Analysis"
-                        class="figure-img">
+                    <img src="img/cost_performance_Gemini_2_5_Flash_HarmBench.png"
+                        alt="Cost vs performance analysis showing CKA-Agent achieves Pareto frontier" class="figure-img"
+                        loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 5:</strong> Attack success rate vs. resource consumption (API calls & tokens) on
                         HarmBench.
@@ -238,7 +299,9 @@
             <section class="content-section">
                 <h2>Evaluation Validity</h2>
                 <figure class="figure-container">
-                    <img src="img/alignment_violin_plots.png" alt="Human-LLM Judge Alignment" class="figure-img">
+                    <img src="img/alignment_violin_plots.png"
+                        alt="Violin plots showing human-LLM judge alignment improving with reasoning access"
+                        class="figure-img" loading="lazy" width="800" height="500">
                     <figcaption>
                         <strong>Figure 6:</strong> Alignment between human and LLM judgments improves dramatically when
                         humans have access to judge reasoning
@@ -289,7 +352,7 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../script.js" defer></script>
 </body>
 
 </html>
