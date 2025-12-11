@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKA-Agent: Leaderboard</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .leaderboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .leaderboard-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fade-in 0.6s ease forwards;
+        }
+
+        .leaderboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .leaderboard-header p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .leaderboard-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .leaderboard-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .leaderboard-action-btn.submit {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff1744 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 23, 68, 0.3);
+        }
+
+        .leaderboard-action-btn.submit:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #d61041 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 23, 68, 0.5);
+        }
+
+        .leaderboards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .leaderboards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .leaderboard-section {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .leaderboard-section:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .leaderboard-title {
+            padding: 24px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            border-bottom: 2px solid #1e40af;
+        }
+
+        .leaderboard-title h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .leaderboard-description {
+            padding: 16px 24px;
+            background: #eff6ff;
+            border-bottom: 1px solid #bfdbfe;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .leaderboard-table thead {
+            background: #dbeafe;
+        }
+
+        .leaderboard-table th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e40af;
+            border-bottom: 2px solid #3b82f6;
+            font-size: 14px;
+        }
+
+        .leaderboard-table td {
+            padding: 16px;
+            border-bottom: 1px solid #bfdbfe;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .leaderboard-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+
+        .toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            margin-top: 16px;
+        }
+
+        .toggle-btn:hover {
+            background: #1e40af;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .hidden-rows {
+            display: none;
+        }
+
+        .hidden-rows.show {
+            display: table-row-group;
+        }
+
+        .leaderboard-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background-color: rgba(217, 119, 6, 0.02);
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 12px;
+        }
+
+        .rank-1 {
+            background-color: #ffd700;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+        }
+
+        .rank-2 {
+            background-color: #c0c0c0;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(192, 192, 192, 0.4);
+        }
+
+        .rank-3 {
+            background-color: #cd7f32;
+            color: white;
+            box-shadow: 0 2px 8px rgba(205, 127, 50, 0.4);
+        }
+
+        .rank-other {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .method-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .method-badge {
+            background-color: var(--bg-accent);
+            color: var(--accent-primary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .method-badge.ours {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        .score-cell {
+            text-align: right;
+            font-weight: 500;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        .score-high {
+            color: #059669;
+        }
+
+        .score-medium {
+            color: var(--accent-primary);
+        }
+
+        .score-low {
+            color: #dc2626;
+        }
+
+        .leaderboard-footer {
+            padding: 24px;
+            background: #f9f9f9;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .submission-notice {
+            background: var(--bg-accent);
+            border: 1px solid var(--accent-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .submission-notice h3 {
+            margin: 0 0 12px 0;
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+        }
+
+        .submission-notice p {
+            margin: 0 0 16px 0;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+            gap: 12px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 24px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-badge {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="leaderboard-container">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Main Page
+        </a>
+
+        <div class="leaderboard-header">
+            <h1>📊 CKA-Agent Leaderboard</h1>
+            <p>Comprehensive evaluation of jailbreak attacks and defense effectiveness against CKA-Agent</p>
+        </div>
+
+        <div class="submission-notice">
+            <h3>🎯 Welcome New Submissions!</h3>
+            <p>We welcome submissions of new attack methods and defense mechanisms. Contact us to add your results to
+                the leaderboard.</p>
+            <div class="leaderboard-actions">
+                <a href="mailto:xinjie@gatech.edu?subject=CKA-Agent%20Leaderboard%20Submission"
+                    class="leaderboard-action-btn submit">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Results & Contact
+                </a>
+            </div>
+        </div>
+
+        <div class="leaderboards-grid">
+            <!-- Attack Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-title">
+                    <h2><i class="fas fa-bomb"></i> Model Vulnerability to CKA</h2>
+                </div>
+                <div class="leaderboard-description">
+                    Target model vulnerability ranking against CKA-Agent attack (Lower ASR is Better)
+                </div>
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Rank</th>
+                            <th>Target Model</th>
+                            <th style="width: 100px; text-align: right;">ASR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-1">🥇</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Claude-Haiku-4.5
+                                </div>
+                            </td>
+                            <td class="score-cell score-low">0.960</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-2">🥈</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Gemini-2.5-Flash
+                                </div>
+                            </td>
+                            <td class="score-cell score-low">0.968</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-3">🥉</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Gemini-2.5-Pro
+                                </div>
+                            </td>
+                            <td class="score-cell score-medium">0.968</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-other">4</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    GPT-oss-120B
+                                </div>
+                            </td>
+                            <td class="score-cell score-high">0.976</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="leaderboard-footer">
+                    <strong>📈 ASR = Attack Success Rate of CKA-Agent.</strong><br>
+                    <strong style="color: #ff1744;">⬆️ Higher values indicate more vulnerable models to CKA-Agent
+                        attack.</strong>
+                </div>
+            </div>
+
+            <!-- Defense Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-title">
+                    <h2><i class="fas fa-shield-alt"></i> Defense Leaderboard</h2>
+                </div>
+                <div class="leaderboard-description">
+                    Effectiveness of defense mechanisms against CKA-Agent (Lower ASR is Better)
+                </div>
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Rank</th>
+                            <th>Defense Method</th>
+                            <th style="width: 100px; text-align: right;">ASR*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-1">🥇</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Circuit Breakers
+                                </div>
+                            </td>
+                            <td class="score-cell score-low">0.873</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-2">🥈</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Perturbation
+                                </div>
+                            </td>
+                            <td class="score-cell score-low">0.917</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-3">🥉</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Rephrasing
+                                </div>
+                            </td>
+                            <td class="score-cell score-medium">0.937</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-other">4</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    No Defense
+                                </div>
+                            </td>
+                            <td class="score-cell score-medium">0.968</td>
+                        </tr>
+                    <tbody class="hidden-rows" id="defense-leaderboard-hidden">
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-other">5</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Llama Guard
+                                </div>
+                            </td>
+                            <td class="score-cell score-high">0.984</td>
+                        </tr>
+                    </tbody>
+                    </tbody>
+                </table>
+                <div class="leaderboard-footer">
+                    <strong>📉 *ASR = Attack Success Rate of CKA-Agent.</strong><br>
+                    <strong style="color: #059669;">⬇️ Lower ASR indicates more effective defense against
+                        CKA-Agent.</strong>
+                </div>
+                <button class="toggle-btn" id="defense-leaderboard-toggle" onclick="toggleDefenseLeaderboard()">
+                    <i class="fas fa-chevron-down"></i>
+                    Show More (1 hidden)
+                </button>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-badge" style="background: #ffd700;"></span>
+                <span>1st Place (Gold)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-badge" style="background: #c0c0c0;"></span>
+                <span>2nd Place (Silver)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-badge" style="background: #cd7f32;"></span>
+                <span>3rd Place (Bronze)</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-badge" style="background: var(--bg-secondary);"></span>
+                <span>Other Rankings</span>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <section style="margin-top: 60px; padding: 40px; background: var(--bg-secondary); border-radius: 12px;">
+            <h2 style="text-align: center; margin-bottom: 40px;">📈 Defense Effectiveness Matrix</h2>
+            <div style="overflow-x: auto;">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Attack Method</th>
+                            <th style="text-align: center;">No Defense</th>
+                            <th style="text-align: center;">Llama Guard</th>
+                            <th style="text-align: center;">Circuit Breakers</th>
+                            <th style="text-align: center;">Rephrasing</th>
+                            <th style="text-align: center;">Perturbation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="method-name">AutoDAN</td>
+                            <td style="text-align: center;">0.767</td>
+                            <td style="text-align: center;">0.365</td>
+                            <td style="text-align: center;">0.254</td>
+                            <td style="text-align: center;">0.318</td>
+                            <td style="text-align: center;">0.389</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">PAIR</td>
+                            <td style="text-align: center;">0.810</td>
+                            <td style="text-align: center;">0.762</td>
+                            <td style="text-align: center;">0.690</td>
+                            <td style="text-align: center;">0.781</td>
+                            <td style="text-align: center;">0.801</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">PAP</td>
+                            <td style="text-align: center;">0.230</td>
+                            <td style="text-align: center;">0.016</td>
+                            <td style="text-align: center;">0.175</td>
+                            <td style="text-align: center;">0.310</td>
+                            <td style="text-align: center;">0.222</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">ActorBreaker</td>
+                            <td style="text-align: center;">0.331</td>
+                            <td style="text-align: center;">0.151</td>
+                            <td style="text-align: center;">0.246</td>
+                            <td style="text-align: center;">0.170</td>
+                            <td style="text-align: center;">0.238</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">X-Teaming</td>
+                            <td style="text-align: center;">0.595</td>
+                            <td style="text-align: center;">0.603</td>
+                            <td style="text-align: center;">0.579</td>
+                            <td style="text-align: center;">0.611</td>
+                            <td style="text-align: center;">0.635</td>
+                        </tr>
+                        <tr>
+                            <td class="method-name">Multi-Agent Jailbreak</td>
+                            <td style="text-align: center;">0.794</td>
+                            <td style="text-align: center;">0.786</td>
+                            <td style="text-align: center;">0.786</td>
+                            <td style="text-align: center;">0.809</td>
+                            <td style="text-align: center;">0.786</td>
+                        </tr>
+                        <tr style="background: #eff6ff;">
+                            <td class="method-name" style="font-weight: 700;">CKA-Agent (Ours)</td>
+                            <td style="text-align: center; font-weight: 700; color: #3b82f6;">0.968</td>
+                            <td style="text-align: center; font-weight: 700; color: #3b82f6;">0.984</td>
+                            <td style="text-align: center; font-weight: 700; color: #3b82f6;">0.873</td>
+                            <td style="text-align: center; font-weight: 700; color: #3b82f6;">0.937</td>
+                            <td style="text-align: center; font-weight: 700; color: #3b82f6;">0.917</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">
+                Attack Success Rate (ASR) values shown. Higher values indicate less effective defense.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <div style="margin-top: 60px; padding: 40px; text-align: center; border-top: 1px solid var(--border-subtle);">
+            <h3 style="margin-bottom: 16px;">Questions or Want to Submit?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Contact us to submit new attack or defense methods for evaluation
+            </p>
+            <a href="mailto:xinjie@gatech.edu?subject=CKA-Agent%20Leaderboard%20Inquiry"
+                class="leaderboard-action-btn submit">
+                <i class="fas fa-paper-plane"></i>
+                Contact: xinjie@gatech.edu
+            </a>
+        </div>
+    </div>
+
+    <!-- Google Analytics -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-VP2GFJFNGW');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VP2GFJFNGW"></script>
+
+    <!-- Toggle Collapse Script -->
+    <script>
+        function toggleDefenseLeaderboard() {
+            const hiddenRows = document.getElementById('defense-leaderboard-hidden');
+            const toggleBtn = document.getElementById('defense-leaderboard-toggle');
+
+            if (hiddenRows.classList.contains('show')) {
+                hiddenRows.classList.remove('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More (1 hidden)';
+            } else {
+                hiddenRows.classList.add('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+            }
+        }
+    </script>
+</body>
+
+</html>

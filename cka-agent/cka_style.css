@@ -55,7 +55,7 @@
     font-size: 42px;
     font-weight: 700;
     line-height: 1.2;
-color: var(--text-primary);
+    color: var(--text-primary);
 }
 
 .article-abstract {
@@ -116,6 +116,34 @@ color: var(--text-primary);
 .project-link.demo:hover {
     background-color: var(--cka-secondary);
     transform: translateY(-2px);
+}
+
+.project-link.leaderboard {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 25%, #c44569 50%, #a73fd8 75%, #6c5ce7 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px rgba(167, 63, 216, 0.4);
+    font-weight: 600;
+    animation: leaderboard-glow 2s ease-in-out infinite;
+}
+
+.project-link.leaderboard:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #dd4a5f 25%, #b33859 50%, #9c2fc8 75%, #5b4bd7 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(167, 63, 216, 0.5), 0 0 35px rgba(167, 63, 216, 0.3);
+    color: white;
+}
+
+@keyframes leaderboard-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(167, 63, 216, 0.4), 0 0 20px rgba(167, 63, 216, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 4px 25px rgba(167, 63, 216, 0.6), 0 0 30px rgba(167, 63, 216, 0.4);
+    }
 }
 
 .authors-section {
@@ -415,23 +443,23 @@ figcaption strong {
     .article-title {
         font-size: 32px;
     }
-    
+
     .article-abstract {
         font-size: 16px;
     }
-    
+
     .content-section h2 {
         font-size: 26px;
     }
-    
+
     .highlights-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .results-summary {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .result-number {
         font-size: 36px;
     }
@@ -441,11 +469,11 @@ figcaption strong {
     .results-summary {
         grid-template-columns: 1fr;
     }
-    
+
     .project-links {
         flex-direction: column;
     }
-    
+
     .project-link {
         width: 100%;
         justify-content: center;
