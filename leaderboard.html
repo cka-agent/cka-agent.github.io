@@ -395,7 +395,8 @@
                     <h2><i class="fas fa-bomb"></i> Model Vulnerability to CKA</h2>
                 </div>
                 <div class="leaderboard-description">
-                    Target model vulnerability ranking against CKA-Agent attack (Lower ASR is Better, ideally 0.0)
+                    Target model vulnerability ranking against CKA-Agent attack on <strong>StrongREJECT</strong> dataset
+                    (Higher ASR = More Vulnerable)
                 </div>
                 <table class="leaderboard-table">
                     <thead>
@@ -414,10 +415,11 @@
                             </td>
                             <td>
                                 <div class="method-name">
-                                    Claude-Haiku-4.5
+                                    GPT-5.2
+                                    <span class="method-badge" style="background: #fef3c7; color: #92400e;">NEW</span>
                                 </div>
                             </td>
-                            <td class="score-cell score-low">0.960</td>
+                            <td class="score-cell score-low">0.932</td>
                         </tr>
                         <tr>
                             <td>
@@ -427,10 +429,11 @@
                             </td>
                             <td>
                                 <div class="method-name">
-                                    Gemini-2.5-Flash
+                                    Gemini-3.0-Pro
+                                    <span class="method-badge" style="background: #fef3c7; color: #92400e;">NEW</span>
                                 </div>
                             </td>
-                            <td class="score-cell score-low">0.968</td>
+                            <td class="score-cell score-low">0.951</td>
                         </tr>
                         <tr>
                             <td>
@@ -443,7 +446,7 @@
                                     Gemini-2.5-Pro
                                 </div>
                             </td>
-                            <td class="score-cell score-medium">0.968</td>
+                            <td class="score-cell score-low">0.951</td>
                         </tr>
                         <tr>
                             <td>
@@ -453,18 +456,50 @@
                             </td>
                             <td>
                                 <div class="method-name">
+                                    Claude-Haiku-4.5
+                                </div>
+                            </td>
+                            <td class="score-cell score-medium">0.969</td>
+                        </tr>
+                    </tbody>
+                    <tbody class="hidden-rows" id="attack-leaderboard-hidden">
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-other">5</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
                                     GPT-oss-120B
                                 </div>
                             </td>
-                            <td class="score-cell score-high">0.976</td>
+                            <td class="score-cell score-medium">0.982</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="rank-badge rank-other">6</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="method-name">
+                                    Gemini-2.5-Flash
+                                </div>
+                            </td>
+                            <td class="score-cell score-high">0.988</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="leaderboard-footer">
-                    <strong>📈 ASR = Attack Success Rate of CKA-Agent.</strong><br>
+                    <strong>📈 ASR = Attack Success Rate of CKA-Agent on StrongREJECT.</strong><br>
                     <strong style="color: #ff1744;">⬆️ Higher values indicate more vulnerable models to CKA-Agent
                         attack.</strong>
                 </div>
+                <button class="toggle-btn" id="attack-leaderboard-toggle" onclick="toggleAttackLeaderboard()">
+                    <i class="fas fa-chevron-down"></i>
+                    Show More (2 hidden)
+                </button>
             </div>
 
             <!-- Defense Leaderboard -->
@@ -696,6 +731,19 @@
             if (hiddenRows.classList.contains('show')) {
                 hiddenRows.classList.remove('show');
                 toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More (1 hidden)';
+            } else {
+                hiddenRows.classList.add('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+            }
+        }
+
+        function toggleAttackLeaderboard() {
+            const hiddenRows = document.getElementById('attack-leaderboard-hidden');
+            const toggleBtn = document.getElementById('attack-leaderboard-toggle');
+
+            if (hiddenRows.classList.contains('show')) {
+                hiddenRows.classList.remove('show');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Show More (2 hidden)';
             } else {
                 hiddenRows.classList.add('show');
                 toggleBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';

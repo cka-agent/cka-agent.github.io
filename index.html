@@ -100,6 +100,7 @@
             </button>
         </div>
         <ul class="toc-list">
+            <li><a href="#frontier-results">🔥 Frontier Models (New!)</a></li>
             <li><a href="#motivation">💡 Motivation</a></li>
             <li><a href="#results">📈 Experimental Results</a>
                 <ul style="margin-left: 15px; margin-top: 5px;">
@@ -202,6 +203,159 @@
                     <a href="leaderboard.html" class="project-link leaderboard">
                         <i class="fa-solid fa-chart-line"></i> Leaderboard (Defense & Attack)
                     </a>
+                </div>
+
+                <!-- Latest Results on Frontier Models -->
+                <div id="frontier-results"
+                    style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 16px; padding: 25px; margin-bottom: 30px;">
+                    <h3 style="color: #92400e; margin-top: 0; margin-bottom: 15px; font-size: 1.3rem;">🔥 Latest Results
+                        on Frontier Models (Dec 2025)</h3>
+                    <p style="font-size: 15px; color: #78350f; margin-bottom: 20px;">
+                        CKA-Agent demonstrates <strong>consistent high attack success rates</strong> against the latest
+                        frontier models:
+                        <strong>GPT-5.2</strong>, <strong>Gemini-3.0-Pro</strong>, and
+                        <strong>Claude-Haiku-4.5</strong>.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;">
+                        <div
+                            style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 13px; opacity: 0.9; margin-bottom: 5px;">GPT-5.2</div>
+                            <div style="font-size: 2rem; font-weight: 700;">93.2%</div>
+                            <div style="font-size: 12px; opacity: 0.85;">StrongREJECT</div>
+                        </div>
+                        <div
+                            style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 13px; opacity: 0.9; margin-bottom: 5px;">Gemini-3.0-Pro</div>
+                            <div style="font-size: 2rem; font-weight: 700;">95.1%</div>
+                            <div style="font-size: 12px; opacity: 0.85;">StrongREJECT</div>
+                        </div>
+                        <div
+                            style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 13px; opacity: 0.9; margin-bottom: 5px;">Claude-Haiku-4.5</div>
+                            <div style="font-size: 2rem; font-weight: 700;">96.9%</div>
+                            <div style="font-size: 12px; opacity: 0.85;">StrongREJECT</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <!-- HarmBench Table -->
+                        <div style="overflow-x: auto;">
+                            <h4 style="color: #92400e; margin: 0 0 10px 0; font-size: 14px; text-align: center;">
+                                HarmBench Dataset</h4>
+                            <table
+                                style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; font-size: 14px;">
+                                <thead>
+                                    <tr style="background: #fef3c7;">
+                                        <th
+                                            style="padding: 10px 12px; text-align: left; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            Model</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            FS↑</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            PS↑</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            V↓</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            R↓</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                                        <td style="padding: 10px 12px; font-weight: 600;">GPT-5.2</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.889</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.079</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.024</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.008</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                                        <td style="padding: 10px 12px; font-weight: 600;">Gemini-3.0-Pro</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.881</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.087</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.000</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.032</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 12px; font-weight: 600;">Claude-Haiku-4.5</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.960</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.024</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.008</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.008</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- StrongREJECT Table -->
+                        <div style="overflow-x: auto;">
+                            <h4 style="color: #92400e; margin: 0 0 10px 0; font-size: 14px; text-align: center;">
+                                StrongREJECT Dataset</h4>
+                            <table
+                                style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; font-size: 14px;">
+                                <thead>
+                                    <tr style="background: #fef3c7;">
+                                        <th
+                                            style="padding: 10px 12px; text-align: left; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            Model</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            FS↑</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            PS↑</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            V↓</th>
+                                        <th
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #92400e; border-bottom: 2px solid #f59e0b;">
+                                            R↓</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                                        <td style="padding: 10px 12px; font-weight: 600;">GPT-5.2</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.932</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.056</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.006</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.006</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                                        <td style="padding: 10px 12px; font-weight: 600;">Gemini-3.0-Pro</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.951</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.037</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.006</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.006</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 12px; font-weight: 600;">Claude-Haiku-4.5</td>
+                                        <td
+                                            style="padding: 10px 8px; text-align: center; font-weight: 600; color: #059669;">
+                                            0.969</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.025</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.006</td>
+                                        <td style="padding: 10px 8px; text-align: center;">0.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; color: #78350f; margin-top: 12px; margin-bottom: 0; text-align: center;">
+                        <strong>Metrics:</strong> FS = Full Success, PS = Partial Success, V = Vacuous, R = Refusal.
+                        Results collected in December 2025.
+                    </p>
                 </div>
 
                 <p class="article-abstract">
@@ -398,6 +552,25 @@
                                 <td>0.992</td>
                             </tr>
                             <tr class="baseline-row">
+                                <td class="method-name">TAP</td>
+                                <td>0.824</td>
+                                <td>0.096</td>
+                                <td>0.040</td>
+                                <td>0.040</td>
+                                <td>0.849</td>
+                                <td>0.095</td>
+                                <td>0.016</td>
+                                <td>0.040</td>
+                                <td>0.095</td>
+                                <td>0.031</td>
+                                <td>0.016</td>
+                                <td>0.857</td>
+                                <td>0.104</td>
+                                <td>0.120</td>
+                                <td>0.024</td>
+                                <td>0.752</td>
+                            </tr>
+                            <tr class="baseline-row">
                                 <td class="method-name">ActorBreaker</td>
                                 <td>0.331</td>
                                 <td>0.102</td>
@@ -551,6 +724,25 @@
                                 <td>0.006</td>
                                 <td>0.000</td>
                                 <td>0.994</td>
+                            </tr>
+                            <tr class="baseline-row">
+                                <td class="method-name">TAP</td>
+                                <td>0.864</td>
+                                <td>0.068</td>
+                                <td>0.019</td>
+                                <td>0.049</td>
+                                <td>0.870</td>
+                                <td>0.056</td>
+                                <td>0.012</td>
+                                <td>0.061</td>
+                                <td>0.095</td>
+                                <td>0.032</td>
+                                <td>0.016</td>
+                                <td>0.857</td>
+                                <td>0.124</td>
+                                <td>0.099</td>
+                                <td>0.012</td>
+                                <td>0.765</td>
                             </tr>
                             <tr class="baseline-row">
                                 <td class="method-name">ActorBreaker</td>
