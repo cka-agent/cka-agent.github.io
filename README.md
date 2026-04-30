@@ -18,7 +18,7 @@
 
 
 
-Official website for **CKA-Agent: The Trojan Knowledge** — a novel jailbreak framework achieving 96%+ success rates against state-of-the-art LLMs through adaptive tree search over correlated knowledge.
+Official website for ICML 2026 paper **CKA-Agent: The Trojan Knowledge** — a novel jailbreak framework achieving 96%+ success rates against state-of-the-art LLMs through adaptive tree search over correlated knowledge.
 
 
 ## Quick Start
@@ -33,13 +33,11 @@ python -m http.server 8080
 If you find CKA-Agent useful in your research, please consider citing:
 
 ```bibtex
-@misc{wei2025trojan,
+@inproceedings{wei2025trojan,
       title={The Trojan Knowledge: Bypassing Commercial LLM Guardrails via Harmless Prompt Weaving and Adaptive Tree Search}, 
       author={Rongzhe Wei and Peizhi Niu and Xinjie Shen and Tony Tu and Yifan Li and Ruihan Wu and Eli Chien and Pin-Yu Chen and Olgica Milenkovic and Pan Li},
-      year={2025},
-      eprint={2512.01353},
-      archivePrefix={arXiv},
-      primaryClass={cs.CR},
-      url={https://arxiv.org/abs/2512.01353}, 
+    booktitle={Forty-third International Conference on Machine Learning},
+    year={2026},
+    url={https://openreview.net/forum?id=IlJeOnKW0K}
 }
 ```
